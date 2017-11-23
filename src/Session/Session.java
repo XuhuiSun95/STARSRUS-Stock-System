@@ -48,8 +48,8 @@ public class Session{
         String password = new String(pwd);
 
         // exit the program, if the login is invalid
-        if(this.verify_login(username, password)){
-            System.err.println("Invalid login. System exit");
+        if(!this.verify_login(username, password)){
+            System.out.println("Invalid username/password \n system exit");
             System.exit(1);
         } else {
             System.out.println("login as:" + username);

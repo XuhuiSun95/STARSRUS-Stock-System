@@ -3,18 +3,22 @@ package Session;
 import Utility.Utility;
 import java.sql.*;
 
-class Manager extends Session{
+
+public class Customer extends Session{
+    private String marketAccountID;
+    private String stockAccountID;
 
     // Override virtual function from super class
     @Override
     public void display_operations(){
         String options = "Please enter the number. Options:\n";
-        options += "1: Add Interest.\n";
-        options += "2: Generate Mongthly Statement.\n";
-        options += "3: List Active Customers.\n";
-        options += "4: Generate Government Drug & Tax Evasion Report.\n";
-        options += "5: Customer Report.\n";
-        options += "6: Delete Transactions.\n";
+        options += "1: Deposit.\n";
+        options += "2: Withdrawl.\n";
+        options += "3: Buy.\n";
+        options += "4: Sell.\n";
+        options += "5: Show Balance.\n";
+        options += "6: List Stock Info.\n";
+        options += "7: List Moive Info. \n";
 
         System.out.println(options);
     }
@@ -22,17 +26,19 @@ class Manager extends Session{
     @Override
     public void process_operations(String request){
         switch (request) {
-            case "1":   this.add_interest();
+            case "1":   this.deposit();
                         break;
-            case "2":   this.generate_monthly_statement();
+            case "2":   this.withdrawl();
                         break;
-            case "3":   this.list_active_customers();
+            case "3":   this.buy();
                         break;
-            case "4":   this.generate_DTER();
+            case "4":   this.sell();
                         break;
-            case "5":   this.generate_customer_report();
+            case "5":   this.show_balance();
                         break;
-            case "6":   this.delete_transcation();
+            case "6":   this.list_stock_info();
+                        break;
+            case "7":   this.list_movie_info();
                         break;
             default:    System.out.println("Wrong input, please try again");
         }
@@ -42,7 +48,7 @@ class Manager extends Session{
     public Boolean verify_login(String username, String password){
         Connection connection = Utility.connection;
         Statement statement = connection.createStatement();
-        String Query = "SELECT *FROM Managers M WHERE M.username =" + username + "AND M.password = " + password;
+        String Query = "SELECT *FROM Customers C WHERE C.username =" + username + "AND C.password = " + password;
         ResultSet resultSet = statement.executeQuery(Query);
 
         if (!resultSet.next() ) {
@@ -53,27 +59,31 @@ class Manager extends Session{
     }
 
     // operation deltails
-    public void add_interest(){
+    public void deposit(){
 
     }
 
-    public void generate_monthly_statement(){
+    public void withdrawl(){
 
     }
 
-    public void list_active_customers(){
+    public void buy(){
 
     }
 
-    public void generate_DTER(){
+    public void sell(){
 
     }
 
-    public void generate_customer_report(){
+    public void show_balance(){
 
     }
 
-    public void delete_transcation(){
+    public void list_stock_info(){
+
+    }
+
+    public void list_movie_info(){
 
     }
 }

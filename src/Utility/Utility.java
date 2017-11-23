@@ -1,5 +1,6 @@
 package Utility;
 
+import java.sql.*;;
 import java.time.LocalDate;
 
 public class Utility{
@@ -12,6 +13,8 @@ public class Utility{
     public static final String HOST = "";
     public static final String USER = "";
     public static final String PWD = "";
+
+    public static Connection connection;
 
     public static LocalDate date;   // system date
     public static Boolean marketState; // open or closed
