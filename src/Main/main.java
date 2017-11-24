@@ -10,9 +10,7 @@ public class main {
     public static void main(String[] args) {
         try {
             //  Register JDBC driver
-            System.out.println("??");
-            //Class.forName(Utility.JDBC_DRIVER).newInstance();
-            System.out.println("!!");
+            Class.forName(Utility.JDBC_DRIVER).newInstance();
 
             //  Open a connection
             System.out.println("Connecting to database...");
