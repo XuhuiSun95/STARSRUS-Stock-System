@@ -134,7 +134,7 @@ public class Customer extends Session{
         String temp = c.readLine("Amount you want to buy");
         int amount = Integer.parseInt(temp);
 
-        double spent = amount * price;
+        double spent = amount * price + 20;
 
         double balance = AccountMarket_DB.get_account_balance(marketAccountID);
         if(spent > balance){
@@ -145,6 +145,7 @@ public class Customer extends Session{
         AccountStock_DB.add_shares(taxID, amount, actorID);
         AccountMarket_DB.add_balance(marketAccountID, -spent);
     }
+
 
     public void sell(){
         Console c = System.console();
@@ -180,7 +181,7 @@ public class Customer extends Session{
         }
 
         AccountStock_DB.add_shares(taxID, -amount, actorID);
-        AccountMarket_DB.add_balance(marketAccountID, price*amount);
+        AccountMarket_DB.add_balance(marketAccountID, price*amount-20);
     }
 
     public void show_balance(){
@@ -189,7 +190,9 @@ public class Customer extends Session{
     }
 
     public void show_transaction(){
-
+        String transactions = Transaction_DB.get_transactions(taxID);
+        System.out.println("Transactions:");
+        System.out.println(transactions);
     }
 
     public void list_actor_stock_info(){

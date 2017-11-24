@@ -66,7 +66,27 @@ public class Manager extends Session{
     }
 
     public void generate_monthly_statement(){
+        Console c = System.console();
+        if (c == null) {
+            System.err.println("No console.");
+            System.exit(1);
+        }
 
+        String taxID = c.readLine("Please enter the tax ID of the customer:")
+
+        String name = Customer_DB.get_name(taxID);
+        String email = Customer_DB.get_email(taxID);
+
+        if(name == "-1" || email == "-1"){
+            System.out.println("No such tax ID!");
+            return;
+        }
+
+        String transactions = Transaction_DB.get_transactions();
+
+        System.out.println("TaxID: " + taxID + " ,Name: " + name + " ,email: " + email + "\n");
+        System.out.println("Transcations");
+        System.out.println(transactions);
     }
 
     public void list_active_customers(){
@@ -86,6 +106,6 @@ public class Manager extends Session{
     }
 
     public void delete_transcation(){
-
+        Transaction_DB.delete_transcation();
     }
 }

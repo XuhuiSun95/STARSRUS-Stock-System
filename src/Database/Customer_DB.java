@@ -3,7 +3,6 @@ package Database;
 import Utility.Utility;
 import java.sql.*;
 import java.sql.ResultSet;
-import javax.management.Query;
 
 public class Customer_DB{
 
@@ -20,6 +19,46 @@ public class Customer_DB{
             }
 
             res =  resultSet.getString("TAXID");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return res;
+    }
+
+    public static String get_email(String taxID){
+        String QUERY =  "SELECT * " +
+                        "FROM Customers C " +
+                        "WHERE C.taxID = " + "'" + taxID + "'";
+
+        ResultSet resultSet = Utility.sql_query(QUERY);
+        String res = "";
+        try{
+            if(!resultSet.next()){
+                return "-1";
+            }
+
+            res =  resultSet.getString("email");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return res;
+    }
+
+    public static String get_name(String taxID){
+        String QUERY =  "SELECT * " +
+                        "FROM Customers C " +
+                        "WHERE C.taxID = " + "'" + taxID + "'";
+                        
+        ResultSet resultSet = Utility.sql_query(QUERY);
+        String res = "";
+        try{
+            if(!resultSet.next()){
+                return "-1";
+            }
+
+            res =  resultSet.getString("name");
         } catch (Exception e){
             e.printStackTrace();
         }

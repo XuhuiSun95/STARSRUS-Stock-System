@@ -63,7 +63,35 @@ public class Admin extends Session{
     }
 
     public void set_date(){
+        Console c = System.console();
+        if (c == null) {
+            System.err.println("No console.");
+            System.exit(1);
+        }
 
+        String date = c.readLine("Please enter the date in following form\n YYYYMMDD:");
+
+        if(date.length() != 8){
+            System.out.println("invalid input !");
+            return;
+        }
+
+        int month = Integer.parseInt(date.substring(4,6));
+        int day = Integer.parseInt(date.substring(6,8));
+
+        // check validity
+        if(month > 12 || month < 1){
+            System.out.println("invalid input !");
+            return;
+        }
+
+        if(month )
+
+        if(month )
+
+        if(month )
+
+        Utility.set_date(date);
     }
 
     public void set_price(){
