@@ -2,6 +2,7 @@ package Session;
 
 import Utility.Utility;
 import java.sql.*;
+import Database.*;
 
 class Manager extends Session{
 
@@ -66,7 +67,7 @@ class Manager extends Session{
     }
 
     public void list_active_customers(){
-        String res = Customer_DB.list_all();
+        String res = Customer_DB.list_active();
 
         System.out.println("Active Customers:\n" + res);
     }
