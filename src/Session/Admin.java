@@ -62,6 +62,16 @@ public class Admin extends Session{
     }
 
     public void set_price(){
+        Console c = System.console();
+        if (c == null) {
+            System.err.println("No console.");
+            System.exit(1);
+        }
 
+        String symbol = c.readLine("Please enter the stock symbol:");
+        String temp = c.readLine("Please enter the price");
+        double price = Double.parseDouble(temp);
+
+        ActorStockInfo_DB.update_price(temp, price);
     }
 }

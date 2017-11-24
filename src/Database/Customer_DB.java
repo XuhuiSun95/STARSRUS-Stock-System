@@ -60,11 +60,11 @@ public class Customer_DB{
                 String marketAccountID = AccountMarket_DB.get_market_account_id(taxID);
                 double b = AccountMarket_DB.get_account_balance(taxID);
                 String balance = (new Double(b)).toString();
-                String stockAccountID = AccountStock_DB.get_stock_account_id(taxID);
+                // String stockAccountID = AccountStock_DB.get_stock_account_id(taxID);
 
                 res += "Username: " + username + " TAXID: " + taxID
                         + " Market Account ID: " + marketAccountID
-                        + " Stock Account ID: " + stockAccountID
+                        // + " Stock Account ID: " + stockAccountID
                         + " balance: " + balance + "\n";
             }
         } catch(Exception e){

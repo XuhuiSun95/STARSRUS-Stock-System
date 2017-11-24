@@ -14,6 +14,10 @@ public class AccountMarket_DB{
         String res = "";
 
         try{
+            if(!resultSet.next()){
+                System.err.println("No such taxID.");
+                System.exit(1);
+            }
             res = resultSet.getString("accountID");
         } catch(Exception e){
             e.printStackTrace();
@@ -31,11 +35,23 @@ public class AccountMarket_DB{
         double res = 0;
 
         try{
+            if(!resultSet.next()){
+                System.err.println("No such market account id.");
+                System.exit(1);
+            }
             res = resultSet.getDouble("balance");
         } catch(Exception e){
             e.printStackTrace();
         }
-        
+
         return res;
+    }
+
+
+    public static void add_balance(String accountID, double amount){
+        String UPDATE = "UPDATE MarketAccounts "
+                        + "SET balance = balance +" + (new Double(amount)).toString()
+                        + "WHERE accountID = " + accountID;
+        Utility.sql_update(UPDATE);
     }
 }

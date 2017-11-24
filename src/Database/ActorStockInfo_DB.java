@@ -34,4 +34,31 @@ public class ActorStockInfo_DB{
 
         return res;
     }
+
+    public static double get_price(String symbol){
+        String QUERY =  "SELECT A.currentPrice" +
+                        "FROM ActorStockInfo A" +
+                        "WHERE A.actorID = " + symbol;
+
+        ResultSet resultSet = Utility.sql_query(QUERY);
+        double res = 0;
+        try{
+            if(!resultSet.next()){
+                return -1.0;
+            }
+
+            res = resultSet.getDouble("currentPrice");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return res;
+    }
+
+    public static update_price(String symbol, double price){
+        String UPDATE = "UPDATE MarketAccounts "
+                        + "SET CURRENTPRICE =" (new Double(price)).toString()
+                        + "WHERE ACTORID = " + symbol;
+        Utility.sql_update(UPDATE);
+    }
 }
