@@ -27,20 +27,42 @@ public class AccountStock_DB{
     //     return res;
     // }
 
-    public static void add_shares(String taxID, String symbol, int amount){
+    public static int get_shares(String taxID, String actorID){
+        String QUERY =  "SELECT S.shares" +
+                        "FROM StockAccounts S" +
+                        "WHERE S.TAXID = " + taxID +
+                        "AND S.actorID = " + actorID;
+
+        ResultSet resultSet = Utility.sql_query(QUERY);
+
+        int res = "";
+
+        try{
+            if(!resultSet.next()){
+                return -1;
+            }
+            res = resultSet.getInteger("shares");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return res;
+    }
+
+    public static void add_shares(String taxID, String actorID, int amount){
         String QUERY =  "SELECT *" +
                         "FROM StockAccounts" +
-                        "WHERE actorID = " + symbol;
+                        "WHERE actorID = " + actorID;
         ResultSet resultSet = Utility.sql_query(QUERY);
         String UPDATE = "";
         if(resultSet.next()){
             UPDATE =    "UPDATE StockAccounts "
-                        + "SET shares = shares +" + (new Integer(amount)).toString()
-                        + "WHERE accountID = " + accountID;
+                        + "SET shares = shares" + (new Integer(amount)).toString()
+                        + "WHERE taxID = " + taxID;
         } else {
             UPDATE =    "INSERT INTO StockAccounts" +
                         "VALUES(" + taxID + "," + (new Integer(amount)).toString() +
-                        "," + symbol + ")";
+                        "," + actorID + ")";
         }
         Utility.sql_update(UPDATE);
     }

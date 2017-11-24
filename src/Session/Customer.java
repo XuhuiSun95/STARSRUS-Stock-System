@@ -3,7 +3,7 @@ package Session;
 import Utility.Utility;
 import java.sql.*;
 import Database.*;
-
+import java.io.Console;
 
 public class Customer extends Session{
     private String marketAccountID;
@@ -128,7 +128,7 @@ public class Customer extends Session{
             return;
         }
 
-        String temp = c.readLine("Amount you want buy");
+        String temp = c.readLine("Amount you want to buy");
         int amount = Integer.parseInt(temp);
 
         double spent = amount * price;
@@ -144,7 +144,40 @@ public class Customer extends Session{
     }
 
     public void sell(){
+        Console c = System.console();
+        if (c == null) {
+            System.err.println("No console.");
+            System.exit(1);
+        }
 
+        String symbol = c.readLine("Stock you want to buy:");
+        if(symbol.length() != 3){
+            System.out.println("Invalid Stock symbol");
+            return;
+        }
+
+        int shares = AccountStock_DB.get_shares(taxID, symbol);
+        if(shares == -1){
+            System.out.println("No such stock!");
+            return;
+        }
+
+        double price = ActorStockInfo_DB.get_price(symbol);
+        if(price == -1.0){
+            System.out.println("No such stock!");
+            return;
+        }
+
+        String temp = c.readLine("Amount you want to sell");
+        int amount = Integer.parseInt(temp);
+
+        if(amount > shares){
+            System.out.println("Not enough shares");
+            return;
+        }
+
+        AccountStock_DB.add_shares(taxID, symbol, -amount);
+        AccountMarket_DB.add_balance(marketAccountID, price*amount);
     }
 
     public void show_balance(){
