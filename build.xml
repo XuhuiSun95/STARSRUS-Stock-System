@@ -13,6 +13,7 @@
 
     <property name="main-class"  value="Main.main"/>
     <property name="init-class"  value="Main.init"/>
+    <property name="clean-class"  value="Main.clean"/>
 
 
 
@@ -37,6 +38,11 @@
                 <attribute name="Init-Class" value="${init-class}"/>
             </manifest>
         </jar>
+        <jar destfile="${jar.dir}/clean.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Clean-Class" value="${clean-class}"/>
+            </manifest>
+        </jar>
     </target>
 
     <target name="init" depends="jar">
@@ -44,6 +50,15 @@
             <classpath>
                 <path refid="classpath"/>
                 <path location="${jar.dir}/init.jar"/>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="cleanDB" depends="jar">
+        <java fork="true" classname="${clean-class}">
+            <classpath>
+                <path refid="classpath"/>
+                <path location="${jar.dir}/clean.jar"/>
             </classpath>
         </java>
     </target>

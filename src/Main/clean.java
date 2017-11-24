@@ -3,7 +3,7 @@ package Main;
 import java.io.*;
 import java.sql.*;
 
-public class init {
+public class clean {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/xuhui_sunDB";
@@ -24,18 +24,18 @@ public class init {
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //  Execute a query
-            System.out.println("Creating table in given database...");
+            System.out.println("Deleting table in given database...");
             stmt = conn.createStatement();
 
-            //  Init data
-            try (BufferedReader br = new BufferedReader(new FileReader("src/data/init.data"))) {
+            //  clean data
+            try (BufferedReader br = new BufferedReader(new FileReader("src/data/clean.data"))) {
                 String sql;
                 while ((sql = br.readLine()) != null) {
                    // process the line.
                     stmt.executeUpdate(sql);
                 }
             }
-            System.out.println("Created table in given database...");
+            System.out.println("Table  deleted in given database...");
 
             //  Clean-up environment
             stmt.close();

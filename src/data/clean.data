@@ -1,0 +1,5 @@
+DROP TABLE Managers;
+DROP TABLE Customers;
+DROP TABLE StockAccounts;
+DROP TABLE MarketAccounts;
+DROP TABLE ActorsStockInfo;
