@@ -50,7 +50,7 @@ public class Customer_DB{
         String QUERY =  "SELECT * " +
                         "FROM Customers C " +
                         "WHERE C.taxID = " + "'" + taxID + "'";
-                        
+
         ResultSet resultSet = Utility.sql_query(QUERY);
         String res = "";
         try{
@@ -68,8 +68,7 @@ public class Customer_DB{
 
     public static String list_active(){
         String QUERY =  "SELECT * " +
-                        "FROM Customers C " +
-                        "WHERE C.active = TRUE";
+                        "FROM Customers C ";
 
         ResultSet resultSet= Utility.sql_query(QUERY);
         String res = "";
@@ -78,7 +77,16 @@ public class Customer_DB{
                 String username = resultSet.getString("username");
                 String taxID = resultSet.getString("TAXID");
 
-                res += "Username: " + username + " TAXID: " + taxID + "\n";
+                Statement saved = Utility.statement;
+                Utility.statement = Utility.connection.createStatement();
+                
+                int total = StockTransaction_DB.get_total_shares();
+
+                Utility.statement.close();
+                Utility.statement = saved;
+
+                if(total >= 1000)
+                    res += "Username: " + username + " TAXID: " + taxID + "\n";
             }
         } catch(Exception e){
             e.printStackTrace();

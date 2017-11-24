@@ -4,7 +4,7 @@ import Utility.Utility;
 import java.sql.*;
 
 
-public class StockTransaction {
+public class StockTransaction_DB{
     public static void record_transaction(String date, String costumerTAXID, String actorID, double price, int shares, double profit){
         String UPDATE = "INSERT INTO StockTransaction " +
                         "VALUES(" + "'" + date + "'" + ","
@@ -22,6 +22,31 @@ public class StockTransaction {
                         "FROM StockTranscations ";
         Utility.sql_update(UPDATE);
     }
+
+
+
+    public static int get_total_shares(String taxID){
+        String QUERY =  "SELECT * " +
+                        "FROM StockTranscations " +
+                        "WHERE T.taxID = " + "'" + taxID + "'";
+
+        ResultSet resultSet = Utility.sql_query(QUERY);
+
+        int sum = 0;
+        try{
+            while(resultSet.next()){
+                int shares = resultSet.getInt("shares");
+
+                sum += abs(shares);
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return sum;
+    }
+
+
 
     public static String get_transactions(String taxID){
         String QUERY =  "SELECT * " +
