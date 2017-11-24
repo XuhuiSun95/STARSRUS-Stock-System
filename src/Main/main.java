@@ -15,6 +15,7 @@ public class main {
             //  Open a connection
             System.out.println("Connecting to database...");
             Utility.connection = DriverManager.getConnection(Utility.HOST,Utility.USER,Utility.PWD);
+            Utility.statement = Utility.connection.createStatement();
 
             //  Creat a session
             Session session = new Session();
@@ -42,9 +43,9 @@ public class main {
 
             session.login();
 
-            //while(true){
-            //    session.single_round_process();
-            //}
+            while(!Utility.logout){
+                session.single_round_process();
+            }
 
             //  Clean-up environment
             Utility.connection.close();
@@ -59,6 +60,12 @@ public class main {
         }
         finally {
             //  finally block used to close resources
+            try {
+                if(Utility.statement!=null)
+                    Utility.statement.close();
+            }
+            catch (SQLException se2) {
+            }// nothing we can do
             try {
                 if(Utility.connection!=null)
                     Utility.connection.close();

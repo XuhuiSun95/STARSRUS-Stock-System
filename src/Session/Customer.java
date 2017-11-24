@@ -19,9 +19,10 @@ public class Customer extends Session{
         options += "3: Buy.\n";
         options += "4: Sell.\n";
         options += "5: Show Balance.\n";
-        options += "6: List Stock Info.\n";
-        options += "7: List Moive Info. \n";
-        options += "8: Exit";
+        options += "6: Show Transaction history.\n";
+        options += "7: List Stock Info.\n";
+        options += "8: List Moive Info. \n";
+        options += "9: Exit";
 
         System.out.println(options);
     }
@@ -39,11 +40,13 @@ public class Customer extends Session{
                         break;
             case "5":   this.show_balance();
                         break;
-            case "6":   this.list_actor_stock_info();
+            case "6":   this.show_transaction();
                         break;
-            case "7":   this.list_movie_info();
+            case "7":   this.list_actor_stock_info();
                         break;
-            case "8":   System.exit(0);
+            case "8":   this.list_movie_info();
+                        break;
+            case "9":   Utility.logout = true;
                         break;
             default:    System.out.println("Wrong input, please try again");
         }
@@ -183,6 +186,10 @@ public class Customer extends Session{
     public void show_balance(){
         double balance = AccountMarket_DB.get_account_balance(marketAccountID);
         System.out.println("Current balance: " + (new Double(balance)).toString());
+    }
+
+    public void show_transaction(){
+
     }
 
     public void list_actor_stock_info(){

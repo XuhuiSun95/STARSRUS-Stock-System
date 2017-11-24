@@ -31,7 +31,7 @@ public class Admin extends Session{
                         break;
             case "4":   this.set_price();
                         break;
-            case "5":   System.exit(0);
+            case "5":   Utility.logout = true;
                         break;
             default:    System.out.println("Wrong input, please try again");
         }

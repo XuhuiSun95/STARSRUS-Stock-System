@@ -6,7 +6,7 @@ import java.sql.*;
 public class ActorStockInfo_DB{
     public static String list_all(){
         String QUERY =  "SELECT * " +
-                        "FROM Customers C";
+                        "FROM ActorsStockInfo";
 
         ResultSet resultSet = Utility.sql_query(QUERY);
 
@@ -36,9 +36,9 @@ public class ActorStockInfo_DB{
     }
 
     public static double get_price(String actorID){
-        String QUERY =  "SELECT A.currentPrice" +
-                        "FROM ActorStockInfo A" +
-                        "WHERE A.actorID = " + actorID;
+        String QUERY =  "SELECT A.currentPrice " +
+                        "FROM ActorStockInfo A " +
+                        "WHERE A.actorID = " + "'" + actorID + "'";
 
         ResultSet resultSet = Utility.sql_query(QUERY);
         double res = 0;
@@ -57,8 +57,8 @@ public class ActorStockInfo_DB{
 
     public static void update_price(String actorID, double price){
         String UPDATE = "UPDATE MarketAccounts "
-                        + "SET CURRENTPRICE =" + (new Double(price)).toString()
-                        + "WHERE ACTORID = " + actorID;
+                        + "SET CURRENTPRICE = " + (new Double(price)).toString() + " "
+                        + "WHERE ACTORID = " + "'" + actorID + "'";
         Utility.sql_update(UPDATE);
     }
 }

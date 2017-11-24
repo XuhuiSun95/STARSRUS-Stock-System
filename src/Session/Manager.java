@@ -36,7 +36,7 @@ public class Manager extends Session{
                         break;
             case "6":   this.delete_transcation();
                         break;
-            case "7":   System.exit(0);
+            case "7":   Utility.logout = true;
                         break;
             default:    System.out.println("Wrong input, please try again");
         }

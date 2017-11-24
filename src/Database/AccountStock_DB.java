@@ -28,10 +28,10 @@ public class AccountStock_DB{
     // }
 
     public static int get_shares(String taxID, String actorID){
-        String QUERY =  "SELECT S.shares" +
-                        "FROM StockAccounts S" +
-                        "WHERE S.TAXID = " + taxID +
-                        "AND S.actorID = " + actorID;
+        String QUERY =  "SELECT S.shares " +
+                        "FROM StockAccounts S " +
+                        "WHERE S.TAXID = " + "'" + taxID + "'" + " " +
+                        "AND S.actorID = " + "'" + actorID + "'";
 
         ResultSet resultSet = Utility.sql_query(QUERY);
 
@@ -50,20 +50,20 @@ public class AccountStock_DB{
     }
 
     public static void add_shares(String taxID, int amount, String actorID){
-        String QUERY =  "SELECT *" +
-                        "FROM StockAccounts" +
-                        "WHERE actorID = " + actorID;
+        String QUERY =  "SELECT * " +
+                        "FROM StockAccounts " +
+                        "WHERE actorID = " + "'" + actorID + "'";
         ResultSet resultSet = Utility.sql_query(QUERY);
         String UPDATE = "";
         try {
             if(resultSet.next()){
                 UPDATE =    "UPDATE StockAccounts "
-                            + "SET shares = shares" + (new Integer(amount)).toString()
-                            + "WHERE taxID = " + taxID;
+                            + "SET shares = shares " + (new Integer(amount)).toString() + " "
+                            + "WHERE taxID = " + "'" + taxID + "'";
             } else {
-                UPDATE =    "INSERT INTO StockAccounts" +
-                            "VALUES(" + taxID + "," + (new Integer(amount)).toString() +
-                            "," + actorID + ")";
+                UPDATE =    "INSERT INTO StockAccounts " +
+                            "VALUES('" + taxID + "'," + (new Integer(amount)).toString() +
+                            ",'" + actorID + "')";
             }
         } catch (Exception e) {
             e.printStackTrace();

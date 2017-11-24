@@ -16,29 +16,31 @@ public class Utility{
     public static final String PWD = "950802cherry";
 
     public static Connection connection;
+    public static Statement statement;
 
     public static LocalDate date;   // system date
     public static Boolean marketState; // open or closed
+    public static Boolean logout = false; // logout flag
 
     public static ResultSet sql_query(String QUERY){
         Connection connection = Utility.connection;
-        Statement statement = null;
+        Statement statement = Utility.statement;
         ResultSet resultSet = null;
         try{
             // find the username and password pair entity
-            statement = connection.createStatement();
             resultSet =  statement.executeQuery(QUERY);
             return resultSet;
         } catch (SQLException se) {
             se.printStackTrace();
-        } finally {
-            try {
-                if(statement != null)
-                    statement.close();
-            } catch(Exception e){
-                e.printStackTrace();
-            }
-        }
+        } 
+        //finally {
+        //    try {
+        //        if(statement != null)
+        //            statement.close();
+        //    } catch(Exception e){
+        //        e.printStackTrace();
+        //    }
+        //}
         return resultSet;
     }
 
