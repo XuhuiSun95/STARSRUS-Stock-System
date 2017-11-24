@@ -11,7 +11,7 @@ public class Admin extends Session{
         String options = "Please enter the number. Options:\n";
         options += "1: Open Market.\n";
         options += "2: Close Market.\n";
-        options += "3: Set today.\n";
+        options += "3: Set date.\n";
         options += "4: Set price.\n";
 
         System.out.println(options);
@@ -24,7 +24,7 @@ public class Admin extends Session{
                         break;
             case "2":   this.close_market();
                         break;
-            case "3":   this.set_today();
+            case "3":   this.set_date();
                         break;
             case "4":   this.set_price();
                         break;
@@ -48,14 +48,14 @@ public class Admin extends Session{
 
     // operation deltails
     public void open_market(){
-
+        Utility.open_market();
     }
 
     public void close_market(){
-
+        Utility.close_market();
     }
 
-    public void set_today(){
+    public void set_date(){
 
     }
 

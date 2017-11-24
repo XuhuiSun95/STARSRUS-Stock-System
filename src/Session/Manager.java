@@ -40,10 +40,11 @@ class Manager extends Session{
 
     @Override
     public Boolean verify_login(String username, String password){
-        Connection connection = Utility.connection;
-        Statement statement = connection.createStatement();
-        String Query = "SELECT *FROM Managers M WHERE M.username =" + username + "AND M.password = " + password;
-        ResultSet resultSet = statement.executeQuery(Query);
+        String query =  "SELECT * " +
+                        "FROM Managers M" +
+                        "WHERE M.username =" + username + "AND M.password = " +     password;
+
+        ResultSet resultSet = Utility.sql_query(query);
 
         if (!resultSet.next() ) {
             return false;

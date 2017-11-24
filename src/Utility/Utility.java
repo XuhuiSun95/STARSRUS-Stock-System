@@ -1,6 +1,7 @@
 package Utility;
 
 import java.sql.*;;
+import java.sql.ResultSet;
 import java.time.LocalDate;
 
 public class Utility{
@@ -18,6 +19,19 @@ public class Utility{
 
     public static LocalDate date;   // system date
     public static Boolean marketState; // open or closed
+
+    public static ResultSet sql_query(String QUERY){
+        Connection connection = Utility.connection;
+        Statement statement = null;
+        try{
+            // find the username and password pair entity
+            statement = connection.createStatement();
+            return statement.executeQuery(QUERY);
+        } finally {
+            if(statement != null)
+                statement.close();
+        }
+    }
 
     public static void open_market(){
         marketState = true;

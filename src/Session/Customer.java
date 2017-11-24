@@ -2,6 +2,7 @@ package Session;
 
 import Utility.Utility;
 import java.sql.*;
+import Database.*;
 
 
 public class Customer extends Session{
@@ -47,15 +48,25 @@ public class Customer extends Session{
     @Override
     public Boolean verify_login(String username, String password){
         Connection connection = Utility.connection;
-        Statement statement = connection.createStatement();
-        String Query = "SELECT *FROM Customers C WHERE C.username =" + username + "AND C.password = " + password;
-        ResultSet resultSet = statement.executeQuery(Query);
+        Statement statement = null;
+        try{
+            // find the username and password pair entity and get the tax id
+            String taxID = Customer_DB.get_tax_id(username, password);
 
-        if (!resultSet.next() ) {
-            return false;
+            // if tax id does not exist
+            if(taxID.equals(new String("-1"))){
+                return false;
+            }
+
+            marketAccountID = AccountMarket_DB.get_market_account_id(taxID);
+            stockAccountID = AccountStock_DB.get_stock_account_id(taxID);
+
+            return true;
+        } finally {
+            if(statement != null){
+                statement.close();
+            }
         }
-
-        return true;
     }
 
     // operation deltails
@@ -76,10 +87,12 @@ public class Customer extends Session{
     }
 
     public void show_balance(){
+        double balance = AccountMarket_DB.get_account_balance(marketAccountID);
 
+        System.out.println("Current balance: " + balance.toString());
     }
 
-    public void list_stock_info(){
+    public void list_actor_stock_info(){
 
     }
 
