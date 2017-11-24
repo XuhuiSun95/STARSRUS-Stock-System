@@ -59,19 +59,19 @@ public class AccountStock_DB{
         try {
             if(resultSet.next()){
                 UPDATE =    "UPDATE StockAccounts "
-                            + "SET avg = (avg*shares + " + price*temp + + ") / (shares +" + temp + ") ";
+                            + "SET avg = (avg*shares + " + price*temp + ") / (shares +" + temp + ") "
                             + "WHERE taxID = " + "'" + taxID + "'";
-                            Utility.sql_update(UPDATE)
+                Utility.sql_update(UPDATE);
 
                 UPDATE =    "UPDATE StockAccounts "
                             + "SET shares = shares " + temp + " "
                             + "WHERE taxID = " + "'" + taxID + "'";
-                            Utility.sql_update(UPDATE)
+                Utility.sql_update(UPDATE);
             } else {
                 UPDATE =    "INSERT INTO StockAccounts " +
                             "VALUES('" + taxID + "'," + (new Integer(amount)).toString() +
                             ",'" + actorID + "')";
-                            Utility.sql_update(UPDATE);
+                Utility.sql_update(UPDATE);
             }
         } catch (Exception e) {
             e.printStackTrace();

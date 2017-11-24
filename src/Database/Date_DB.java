@@ -16,8 +16,8 @@ public class Date_DB{
 
         try{
             if(!resultSet.next()){
-                System.out.println("current date not found!")
-                System.exit(1)
+                System.out.println("current date not found!");
+                System.exit(1);
             }
 
             date = resultSet.getString("d");
