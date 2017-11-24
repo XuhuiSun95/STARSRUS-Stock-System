@@ -91,6 +91,9 @@ public class Customer extends Session{
         String amount = c.readLine("Please enter the amount:");
 
         AccountMarket_DB.add_balance(marketAccountID, Double.parseDouble(amount));
+
+        double balance = AccountMarket_DB.get_account_balance(marketAccountID);
+        MarketTransaction.add_transaction(Utility.datdate, taxID, Double.parseDouble(amount), balance)
     }
 
     public void withdrawl(){
@@ -110,6 +113,9 @@ public class Customer extends Session{
         }
 
         AccountMarket_DB.add_balance(marketAccountID, -amount);
+
+        balance = AccountMarket_DB.get_account_balance(marketAccountID);
+        MarketTransaction.add_transaction(Utility.datdate, taxID, -amount, balance)
     }
 
     public void buy(){
@@ -144,6 +150,8 @@ public class Customer extends Session{
 
         AccountStock_DB.add_shares(taxID, amount, actorID);
         AccountMarket_DB.add_balance(marketAccountID, -spent);
+
+        StockTransaction.record_transaction(Utility.date(), taxID, actorID, price, amount, 0);
     }
 
 
@@ -182,6 +190,9 @@ public class Customer extends Session{
 
         AccountStock_DB.add_shares(taxID, -amount, actorID);
         AccountMarket_DB.add_balance(marketAccountID, price*amount-20);
+
+
+        StockTransaction.record_transaction(Utility.date(), taxID, actorID, price, amount, 0);
     }
 
     public void show_balance(){

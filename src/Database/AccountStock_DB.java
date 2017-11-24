@@ -49,25 +49,32 @@ public class AccountStock_DB{
         return res;
     }
 
-    public static void add_shares(String taxID, int amount, String actorID){
+    public static void add_shares(String taxID, int amount, String actorID, double price){
         String QUERY =  "SELECT * " +
                         "FROM StockAccounts " +
                         "WHERE actorID = " + "'" + actorID + "'";
         ResultSet resultSet = Utility.sql_query(QUERY);
         String UPDATE = "";
+        int temp = (new Integer(amount)).toString();
         try {
             if(resultSet.next()){
                 UPDATE =    "UPDATE StockAccounts "
-                            + "SET shares = shares " + (new Integer(amount)).toString() + " "
+                            + "SET avg = (avg*shares + " + price*temp + + ") / (shares +" + temp + ") ";
                             + "WHERE taxID = " + "'" + taxID + "'";
+                            Utility.sql_update(UPDATE)
+
+                UPDATE =    "UPDATE StockAccounts "
+                            + "SET shares = shares " + temp + " "
+                            + "WHERE taxID = " + "'" + taxID + "'";
+                            Utility.sql_update(UPDATE)
             } else {
                 UPDATE =    "INSERT INTO StockAccounts " +
                             "VALUES('" + taxID + "'," + (new Integer(amount)).toString() +
                             ",'" + actorID + "')";
+                            Utility.sql_update(UPDATE);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Utility.sql_update(UPDATE);
     }
 }

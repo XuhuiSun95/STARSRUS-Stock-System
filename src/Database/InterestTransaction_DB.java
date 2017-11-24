@@ -5,7 +5,7 @@ import java.sql.*;
 
 
 public class InterestTransaction {
-    public static void add_transaction(String date, String costumerTAXID, String managerTAXID, double interest, double balance){
+    public static void record_transaction(String date, String costumerTAXID, String managerTAXID, double interest, double balance){
         String UPDATE = "INSERT INTO InterestTransaction " +
                         "VALUES(" + "'" + date + "'" + ","
                                 + "'" + costumerTAXID + "'" + ","

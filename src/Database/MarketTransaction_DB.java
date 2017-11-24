@@ -5,7 +5,7 @@ import java.sql.*;
 
 
 public class MarketTransaction {
-    public static void add_transaction(String date, String costumerTAXID, double amount, double balance){
+    public static void record_transaction(String date, String costumerTAXID, double amount, double balance){
         String UPDATE = "INSERT INTO MarketTransaction " +
                         "VALUES(" + "'" + date + "'" + ","
                                 + "'" + costumerTAXID + "'" + ","

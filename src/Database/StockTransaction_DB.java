@@ -5,7 +5,7 @@ import java.sql.*;
 
 
 public class StockTransaction {
-    public static void add_transaction(String date, String costumerTAXID, String actorID, double price, int shares, double profit){
+    public static void record_transaction(String date, String costumerTAXID, String actorID, double price, int shares, double profit){
         String UPDATE = "INSERT INTO StockTransaction " +
                         "VALUES(" + "'" + date + "'" + ","
                                 + "'" + costumerTAXID + "'" + ","
