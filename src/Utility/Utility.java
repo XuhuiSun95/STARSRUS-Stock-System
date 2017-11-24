@@ -11,9 +11,9 @@ public class Utility{
 
     // parameters for connecting to the MySQL server
     public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    public static final String HOST = "";
-    public static final String USER = "";
-    public static final String PWD = "";
+    public static final String HOST = "jdbc:mysql://localhost/xuhui_sunDB";
+    public static final String USER = "root";
+    public static final String PWD = "950802cherry";
 
     public static Connection connection;
 
@@ -40,6 +40,25 @@ public class Utility{
             }
         }
         return resultSet;
+    }
+
+    public static void sql_update(String UPDATE){
+        Connection connection = Utility.connection;
+        Statement statement = null;
+        try{
+            // find the username and password pair entity
+            statement = connection.createStatement();
+            statement.executeUpdate(UPDATE);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(statement != null)
+                    statement.close();
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public static void open_market(){

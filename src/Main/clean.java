@@ -1,27 +1,21 @@
 package Main;
 
 import java.io.*;
+import Utility.Utility;
 import java.sql.*;
 
 public class clean {
-    // JDBC driver name and database URL
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/xuhui_sunDB";
-
-    //  Database credentials
-    static final String USER = "root";
-    static final String PASS = "950802cherry";
 
     public static void main(String[] args) {
         Connection conn = null;
         Statement stmt = null;
         try {
             //  Register JDBC driver
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Class.forName(Utility.JDBC_DRIVER).newInstance();
 
             //  Open a connection
             System.out.println("Connecting to database...");
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+            conn = DriverManager.getConnection(Utility.HOST,Utility.USER,Utility.PWD);
 
             //  Execute a query
             System.out.println("Deleting table in given database...");
