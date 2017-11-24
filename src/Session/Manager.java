@@ -16,6 +16,7 @@ class Manager extends Session{
         options += "4: Generate Government Drug & Tax Evasion Report.\n";
         options += "5: Customer Report.\n";
         options += "6: Delete Transactions.\n";
+        options += "7: Exit";
 
         System.out.println(options);
     }
@@ -34,6 +35,8 @@ class Manager extends Session{
             case "5":   this.generate_customer_report();
                         break;
             case "6":   this.delete_transcation();
+                        break;
+            case "7":   System.exit(0);
                         break;
             default:    System.out.println("Wrong input, please try again");
         }

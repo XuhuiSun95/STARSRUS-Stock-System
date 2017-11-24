@@ -21,6 +21,7 @@ public class Customer extends Session{
         options += "5: Show Balance.\n";
         options += "6: List Stock Info.\n";
         options += "7: List Moive Info. \n";
+        options += "8: Exit";
 
         System.out.println(options);
     }
@@ -41,6 +42,8 @@ public class Customer extends Session{
             case "6":   this.list_actor_stock_info();
                         break;
             case "7":   this.list_movie_info();
+                        break;
+            case "8":   System.exit(0);
                         break;
             default:    System.out.println("Wrong input, please try again");
         }
@@ -120,7 +123,7 @@ public class Customer extends Session{
         }
 
         double price = ActorStockInfo_DB.get_price(symbol);
-        if(double == -1.0){
+        if(price == -1.0){
             System.out.println("No such stock!");
             return;
         }

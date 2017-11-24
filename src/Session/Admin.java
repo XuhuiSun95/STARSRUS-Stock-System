@@ -13,6 +13,7 @@ public class Admin extends Session{
         options += "2: Close Market.\n";
         options += "3: Set date.\n";
         options += "4: Set price.\n";
+        options += "5: Exit";
 
         System.out.println(options);
     }
@@ -27,6 +28,8 @@ public class Admin extends Session{
             case "3":   this.set_date();
                         break;
             case "4":   this.set_price();
+                        break;
+            case "5":   System.exit(0);
                         break;
             default:    System.out.println("Wrong input, please try again");
         }

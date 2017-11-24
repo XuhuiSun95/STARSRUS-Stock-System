@@ -1,23 +1,25 @@
 package Session;
 
 import java.io.Console;
-import static org.junit.Assert.*;
 
 public class Session{
 
     // virtual method in super class
     public void display_operations(){
-        assert false : "calling virtual method";
+        System.err.println("Invalid instance.");
+        System.exit(1);
     }
 
     // virtual method in super class
     public void process_operations(String request){
-        assert false : "calling virtual method";
+        System.err.println("Invalid instance.");
+        System.exit(1);
     }
 
     // virtual method in super class
     public Boolean verify_login(String username, String password){
-        assert false : "calling virtual method";
+        System.err.println("Invalid instance.");
+        System.exit(1);
         return false;
     }
 
