@@ -37,7 +37,7 @@ public class Customer extends Session{
                         break;
             case "5":   this.show_balance();
                         break;
-            case "6":   this.list_stock_info();
+            case "6":   this.list_actor_stock_info();
                         break;
             case "7":   this.list_movie_info();
                         break;
@@ -63,8 +63,12 @@ public class Customer extends Session{
 
             return true;
         } finally {
-            if(statement != null){
-                statement.close();
+            try{
+                if(statement != null){
+                    statement.close();
+                }
+            } catch (Exception e){
+                e.printStackTrace();
             }
         }
     }
@@ -88,12 +92,12 @@ public class Customer extends Session{
 
     public void show_balance(){
         double balance = AccountMarket_DB.get_account_balance(marketAccountID);
-
-        System.out.println("Current balance: " + balance.toString());
+        System.out.println("Current balance: " + (new Double(balance)).toString());
     }
 
     public void list_actor_stock_info(){
-
+        String res = ActorStockInfo_DB.list_all();
+        System.out.println("All Actor and Stock Info:\n" + res);
     }
 
     public void list_movie_info(){

@@ -11,7 +11,15 @@ public class AccountMarket_DB{
                         "WHERE M.TAXID = " + taxID;
         ResultSet resultSet = Utility.sql_query(QUERY);
 
-        return resultSet.getString("accountID");
+        String res = "";
+
+        try{
+            res = resultSet.getString("accountID");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return res;
     }
 
     public static double get_account_balance(String accountId){
@@ -20,6 +28,14 @@ public class AccountMarket_DB{
                         "WHERE M.accountID = " + accountId;
         ResultSet resultSet = Utility.sql_query(QUERY);
 
-        return resultSet.getDouble("balance");
+        double res = 0;
+
+        try{
+            res = resultSet.getDouble("balance");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return res;
     }
 }

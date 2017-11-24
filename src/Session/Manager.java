@@ -45,9 +45,12 @@ class Manager extends Session{
                         "WHERE M.username =" + username + "AND M.password = " +     password;
 
         ResultSet resultSet = Utility.sql_query(query);
-
-        if (!resultSet.next() ) {
-            return false;
+        try{
+            if (!resultSet.next() ) {
+                return false;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
 
         return true;

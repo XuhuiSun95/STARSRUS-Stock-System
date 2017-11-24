@@ -13,12 +13,18 @@ public class Customer_DB{
                         "WHERE C.username =" + username + "AND C.password = " + password;
 
         ResultSet resultSet = Utility.sql_query(QUERY);
+        String res = "";
+        try{
+            if(!resultSet.next()){
+                return "-1";
+            }
 
-        if(!resultSet.next()){
-            return "-1";
+            res =  resultSet.getString("TAXID");
+        } catch (Exception e){
+            e.printStackTrace();
         }
 
-        return resultSet.getString("TAXID");
+        return res;
     }
 
 

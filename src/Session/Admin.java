@@ -34,13 +34,15 @@ public class Admin extends Session{
 
     @Override
     public Boolean verify_login(String username, String password){
-        Connection connection = Utility.connection;
-        Statement statement = connection.createStatement();
-        String Query = "SELECT *FROM Admin A WHERE A.username =" + username + "AND A.password = " + password;
-        ResultSet resultSet = statement.executeQuery(Query);
+        String QUERY = "SELECT *FROM Admin A WHERE A.username =" + username + "AND A.password = " + password;
+        ResultSet resultSet = Utility.sql_query(QUERY);
 
-        if (!resultSet.next() ) {
-            return false;
+        try{
+            if (!resultSet.next() ) {
+                return false;
+            }
+        } catch(Exception e){
+            e.printStackTrace();
         }
 
         return true;

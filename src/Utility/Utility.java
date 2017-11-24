@@ -23,16 +23,23 @@ public class Utility{
     public static ResultSet sql_query(String QUERY){
         Connection connection = Utility.connection;
         Statement statement = null;
+        ResultSet resultSet = null;
         try{
             // find the username and password pair entity
             statement = connection.createStatement();
-            return statement.executeQuery(QUERY);
+            resultSet =  statement.executeQuery(QUERY);
+            return resultSet;
         } catch (SQLException se) {
             se.printStackTrace();
         } finally {
-            if(statement != null)
-                statement.close();
+            try {
+                if(statement != null)
+                    statement.close();
+            } catch(Exception e){
+                e.printStackTrace();
+            }
         }
+        return resultSet;
     }
 
     public static void open_market(){
