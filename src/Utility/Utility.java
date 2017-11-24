@@ -24,14 +24,10 @@ public class Utility{
         Connection connection = Utility.connection;
         Statement statement = null;
         ResultSet resultSet = null;
-        System.out.println("222");
         try{
             // find the username and password pair entity
-            System.out.println("first");
             statement = connection.createStatement();
-            System.out.println("second");
             resultSet =  statement.executeQuery(QUERY);
-            System.out.println("111");
             return resultSet;
         } catch (SQLException se) {
             se.printStackTrace();
