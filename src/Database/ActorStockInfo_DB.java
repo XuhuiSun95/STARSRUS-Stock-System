@@ -35,10 +35,10 @@ public class ActorStockInfo_DB{
         return res;
     }
 
-    public static double get_price(String symbol){
+    public static double get_price(String actorID){
         String QUERY =  "SELECT A.currentPrice" +
                         "FROM ActorStockInfo A" +
-                        "WHERE A.actorID = " + symbol;
+                        "WHERE A.actorID = " + actorID;
 
         ResultSet resultSet = Utility.sql_query(QUERY);
         double res = 0;
@@ -55,10 +55,10 @@ public class ActorStockInfo_DB{
         return res;
     }
 
-    public static update_price(String symbol, double price){
+    public static void update_price(String actorID, double price){
         String UPDATE = "UPDATE MarketAccounts "
-                        + "SET CURRENTPRICE =" (new Double(price)).toString()
-                        + "WHERE ACTORID = " + symbol;
+                        + "SET CURRENTPRICE =" + (new Double(price)).toString()
+                        + "WHERE ACTORID = " + actorID;
         Utility.sql_update(UPDATE);
     }
 }

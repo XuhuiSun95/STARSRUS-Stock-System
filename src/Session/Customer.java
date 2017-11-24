@@ -116,13 +116,13 @@ public class Customer extends Session{
             System.exit(1);
         }
 
-        String symbol = c.readLine("Stock you want to buy:");
-        if(symbol.length() != 3){
+        String actorID = c.readLine("Stock you want to buy:");
+        if(actorID.length() != 3){
             System.out.println("Invalid Stock symbol");
             return;
         }
 
-        double price = ActorStockInfo_DB.get_price(symbol);
+        double price = ActorStockInfo_DB.get_price(actorID);
         if(price == -1.0){
             System.out.println("No such stock!");
             return;
@@ -139,8 +139,8 @@ public class Customer extends Session{
             return;
         }
 
-        AccountStock_DB.add_shares(taxID, amount, symbol);
-        AccountMarket_DB.add_balance(-spent);
+        AccountStock_DB.add_shares(taxID, amount, actorID);
+        AccountMarket_DB.add_balance(marketAccountID, -spent);
     }
 
     public void sell(){
@@ -150,19 +150,19 @@ public class Customer extends Session{
             System.exit(1);
         }
 
-        String symbol = c.readLine("Stock you want to buy:");
-        if(symbol.length() != 3){
+        String actorID = c.readLine("Stock you want to buy:");
+        if(actorID.length() != 3){
             System.out.println("Invalid Stock symbol");
             return;
         }
 
-        int shares = AccountStock_DB.get_shares(taxID, symbol);
+        int shares = AccountStock_DB.get_shares(taxID, actorID);
         if(shares == -1){
             System.out.println("No such stock!");
             return;
         }
 
-        double price = ActorStockInfo_DB.get_price(symbol);
+        double price = ActorStockInfo_DB.get_price(actorID);
         if(price == -1.0){
             System.out.println("No such stock!");
             return;
@@ -176,7 +176,7 @@ public class Customer extends Session{
             return;
         }
 
-        AccountStock_DB.add_shares(taxID, symbol, -amount);
+        AccountStock_DB.add_shares(taxID, -amount, actorID);
         AccountMarket_DB.add_balance(marketAccountID, price*amount);
     }
 

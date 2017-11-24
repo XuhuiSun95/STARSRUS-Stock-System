@@ -1,42 +1,74 @@
 package Main;
 
 import Session.*;
+import java.io.Console;
 import Utility.Utility;
+import java.sql.*;
 
 public class main {
 
-    Session session = new Session();
-
     public static void main(String[] args) {
-        System.out.println("System ON");
-        Console c = System.console();
-        if (c == null) {
-            System.err.println("No console.");
-            System.exit(1);
+        try {
+            //  Register JDBC driver
+            System.out.println("??");
+            //Class.forName(Utility.JDBC_DRIVER).newInstance();
+            System.out.println("!!");
+
+            //  Open a connection
+            System.out.println("Connecting to database...");
+            Utility.connection = DriverManager.getConnection(Utility.HOST,Utility.USER,Utility.PWD);
+
+            //  Creat a session
+            Session session = new Session();
+            
+            System.out.println("System ON");
+            Console c = System.console();
+            if (c == null) {
+                System.err.println("No console.");
+                System.exit(1);
+            }
+
+            System.out.println("login as : 1.Customer 2.Manager 3.Admin");
+            String input = c.readLine("enter the number:");
+
+            switch (input){
+                case "1":   session = new Customer();
+                            break;
+                case "2":   session = new Manager();
+                            break;
+                case "3":   session = new Customer();
+                            break;
+                default:    System.out.println("invalid input");
+                            System.exit(1);
+            }
+
+            session.login();
+
+            //while(true){
+            //    session.single_round_process();
+            //}
+
+            //  Clean-up environment
+            Utility.connection.close();
         }
-
-        System.out.println("login as : 1.Customer 2.Manager 3.Admin");
-        String input = c.readLine("enter the number:");
-
-        switch (input){
-            case "1":   session = new Customer();
-                        break;
-            case "2":   session = new Manager();
-                        break;
-            case "3":   session = new Customer();
-                        break;
-            default:    System.out.println("invalid input");
-                        System.exit(1);
+        catch (SQLException se) {
+            //  Handle errors for JDBC
+            se.printStackTrace();
         }
-
-        session.login();
-
-        while(true){
-            session.display_operations();
-            input = c.readLine("enter the number:");
-            session.process(intput);
+        catch (Exception e) {
+            //  Handle errors for Class.forName
+            e.printStackTrace();
         }
-
-        return 0;
+        finally {
+            //  finally block used to close resources
+            try {
+                if(Utility.connection!=null)
+                    Utility.connection.close();
+            }
+            catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        System.out.println("Goodbye!");
     }
 }

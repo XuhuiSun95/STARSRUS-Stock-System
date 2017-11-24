@@ -4,7 +4,7 @@ import Utility.Utility;
 import java.sql.*;
 import Database.*;
 
-class Manager extends Session{
+public class Manager extends Session{
 
     // Override virtual function from super class
     @Override

@@ -35,13 +35,13 @@ public class AccountStock_DB{
 
         ResultSet resultSet = Utility.sql_query(QUERY);
 
-        int res = "";
+        int res = -1;
 
         try{
             if(!resultSet.next()){
                 return -1;
             }
-            res = resultSet.getInteger("shares");
+            res = resultSet.getInt("shares");
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -49,20 +49,24 @@ public class AccountStock_DB{
         return res;
     }
 
-    public static void add_shares(String taxID, String actorID, int amount){
+    public static void add_shares(String taxID, int amount, String actorID){
         String QUERY =  "SELECT *" +
                         "FROM StockAccounts" +
                         "WHERE actorID = " + actorID;
         ResultSet resultSet = Utility.sql_query(QUERY);
         String UPDATE = "";
-        if(resultSet.next()){
-            UPDATE =    "UPDATE StockAccounts "
-                        + "SET shares = shares" + (new Integer(amount)).toString()
-                        + "WHERE taxID = " + taxID;
-        } else {
-            UPDATE =    "INSERT INTO StockAccounts" +
-                        "VALUES(" + taxID + "," + (new Integer(amount)).toString() +
-                        "," + actorID + ")";
+        try {
+            if(resultSet.next()){
+                UPDATE =    "UPDATE StockAccounts "
+                            + "SET shares = shares" + (new Integer(amount)).toString()
+                            + "WHERE taxID = " + taxID;
+            } else {
+                UPDATE =    "INSERT INTO StockAccounts" +
+                            "VALUES(" + taxID + "," + (new Integer(amount)).toString() +
+                            "," + actorID + ")";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         Utility.sql_update(UPDATE);
     }
