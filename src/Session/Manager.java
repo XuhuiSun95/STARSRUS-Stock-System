@@ -2,6 +2,7 @@ package Session;
 
 import Utility.Utility;
 import java.sql.*;
+import Database.*;
 
 class Manager extends Session{
 
@@ -66,7 +67,9 @@ class Manager extends Session{
     }
 
     public void list_active_customers(){
+        String res = Customer_DB.list_active();
 
+        System.out.println("Active Customers:\n" + res);
     }
 
     public void generate_DTER(){
@@ -74,7 +77,9 @@ class Manager extends Session{
     }
 
     public void generate_customer_report(){
+        String res = Customer_DB.customer_report();
 
+        System.out.println("Customer Report:\n" + res);
     }
 
     public void delete_transcation(){
