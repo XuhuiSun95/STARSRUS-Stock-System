@@ -1,10 +1,12 @@
 package Main;
 
-import java.sql.*;
+import Session.*;
+import Utility.Utility;
 
 public class main {
 
     Session session = new Session();
+
     public static void main(String[] args) {
         System.out.println("System ON");
         Console c = System.console();
@@ -30,7 +32,11 @@ public class main {
         session.login();
 
         while(true){
-            
+            session.display_operations();
+            input = c.readLine("enter the number:");
+            session.process(intput);
         }
+
+        return 0;
     }
 }
