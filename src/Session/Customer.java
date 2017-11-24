@@ -190,9 +190,13 @@ public class Customer extends Session{
     }
 
     public void show_transaction(){
-        String transactions = Transaction_DB.get_transactions(taxID);
+        String marketTransactions = MarketTransaction_DB.get_transactions(taxID);
+        String stockTransactions = StockTransaction_DB.get_transactions(taxID);
+        String interestTransactions = InterestTransaction_DB.get_transactions(taxID);
         System.out.println("Transactions:");
-        System.out.println(transactions);
+        System.out.println(marketTransactions);
+        System.out.println(stockTransactions);
+        System.out.println(interestTransactions);
     }
 
     public void list_actor_stock_info(){

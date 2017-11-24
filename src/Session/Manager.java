@@ -82,11 +82,15 @@ public class Manager extends Session{
             return;
         }
 
-        String transactions = Transaction_DB.get_transactions();
+        String marketTransactions = MarketTransaction_DB.get_transactions(taxID);
+        String stockTransactions = StockTransaction_DB.get_transactions(taxID);
+        String interestTransactions = InterestTransaction_DB.get_transactions(taxID);
 
         System.out.println("TaxID: " + taxID + " ,Name: " + name + " ,email: " + email + "\n");
         System.out.println("Transcations");
-        System.out.println(transactions);
+        System.out.println(marketTransactions);
+        System.out.println(stockTransactions);
+        System.out.println(interestTransactions);
     }
 
     public void list_active_customers(){
@@ -106,6 +110,8 @@ public class Manager extends Session{
     }
 
     public void delete_transcation(){
-        Transaction_DB.delete_transcation();
+        MarketTransaction_DB.delete_transcation();
+        StockTransaction_DB.delete_transcation();
+        InterestTransaction.delete_transcation();
     }
 }
