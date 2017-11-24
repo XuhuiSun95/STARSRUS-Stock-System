@@ -1,8 +1,9 @@
 package Main;
 
+import java.io.*;
 import java.sql.*;
 
-public class main {
+public class init {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/xuhui_sunDB";
@@ -25,26 +26,17 @@ public class main {
             //  Execute a query
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
-            String sql;
-            sql = "SELECT id, first, last, age FROM Employees";
-            ResultSet rs = stmt.executeQuery(sql);
 
-            //  Extract data from result set
-            while(rs.next()) {
-                //  Retrieve by column name
-                int id  = rs.getInt("id");
-                int age = rs.getInt("age");
-                String first = rs.getString("first");
-                String last = rs.getString("last");
-
-                //  Display values
-                System.out.print("ID: " + id);
-                System.out.print(", Age: " + age);
-                System.out.print(", First: " + first);
-                System.out.println(", Last: " + last);
+            //  Init data
+            try (BufferedReader br = new BufferedReader(new FileReader("src/data/init.data"))) {
+                String sql;
+                while ((sql = br.readLine()) != null) {
+                   // process the line.
+                    stmt.executeUpdate(sql);
+                }
             }
+
             //  Clean-up environment
-            rs.close();
             stmt.close();
             conn.close();
         }

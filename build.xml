@@ -12,6 +12,7 @@
     <property name="jar.dir"     value="${build.dir}/jar"/>
 
     <property name="main-class"  value="Main.main"/>
+    <property name="init-class"  value="Main.init"/>
 
 
 
@@ -21,7 +22,7 @@
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="false"/>
     </target>
 
     <target name="jar" depends="compile">
@@ -31,6 +32,20 @@
                 <attribute name="Main-Class" value="${main-class}"/>
             </manifest>
         </jar>
+        <jar destfile="${jar.dir}/init.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Init-Class" value="${init-class}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="init" depends="jar">
+        <java fork="true" classname="${init-class}">
+            <classpath>
+                <path refid="classpath"/>
+                <path location="${jar.dir}/init.jar"/>
+            </classpath>
+        </java>
     </target>
 
     <target name="run" depends="jar">
@@ -42,8 +57,6 @@
         </java>
     </target>
 
-    <target name="clean-build" depends="clean,jar"/>
-
-    <target name="main" depends="clean,run"/>
+    <target name="main" depends="clean,jar"/>
 
 </project>

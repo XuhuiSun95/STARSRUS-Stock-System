@@ -17,7 +17,7 @@ public class AccountMarket_DB{
     public static double get_account_balance(String accountId){
         String QUERY =  "SELECT M.balance" +
                         "FROM MarketAccounts M" +
-                        "WHERE M.accountID = " + accountID;
+                        "WHERE M.accountID = " + accountId;
         ResultSet resultSet = Utility.sql_query(QUERY);
 
         return resultSet.getDouble("balance");

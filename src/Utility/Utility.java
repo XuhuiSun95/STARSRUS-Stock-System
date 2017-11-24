@@ -27,6 +27,8 @@ public class Utility{
             // find the username and password pair entity
             statement = connection.createStatement();
             return statement.executeQuery(QUERY);
+        } catch (SQLException se) {
+            se.printStackTrace();
         } finally {
             if(statement != null)
                 statement.close();

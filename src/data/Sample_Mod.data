@@ -1,0 +1,90 @@
+------------------------------- NOTE ----------------------------------------
+
+You are required to input the following data into your database accurately,
+because they will be used in the demo.
+ 
+The data sheet is just some data your system should manage,
+it does not mean that you should store them in this form,
+you should create your own data base schema by yourself.
+
+This data is snapshot of your system on 3/16/2013. Since we only care about 
+all the transactions happen in a month, you can assume there are no transactions 
+from 3/1/2013 to 3/16/2013 which means the account balance remains the same during 
+this period. In the demo, we will ask you to set the date to some day, say 3/18/2013. 
+So it means no transaction happen between 3/16/2013 and 3/18/2013. This is important 
+because it will affect the monthly interest calculation.  
+
+-----------------------------------------------------------------------------
+ 
+ADMINISTRATOR (MANAGER/employees)
+=============
+
+Name,username,password,Address,STATE,Phone,email,TAXID,SSN
+John Admin,admin,secret,Stock Company SB,CA,(805)6374632,admin@stock.com,1000,606-60-6060
+
+CUSTOMERS  
+=========
+
+Name,username,password,Address,STATE,Phone,email,TAXID,SSN
+Alfred Hitchcock,alfred,hi,6667 El Colegio #40 SB,CA,(805)2574499,alfred@hotmail.com,1022,606-76-7900
+Billy Clinton,billy,cl,5777 Hollister SB,CA,(805)5629999,billy@yahoo.com,3045,606-76-7903
+Cindy Laugher,cindy,la,7000 Hollister SB,CA,(805)6930011,cindy@hotmail.com,2034,606-70-7900
+David Copperfill,david,co,1357 State St SB,CA,(805)8240011,david@yahoo.com,4093,506-78-7900
+Elizabeth Sailor,sailor,sa,4321 State St SB,CA,(805)1234567,sailor@hotmail.com,1234,436-76-7900
+George Brush,brush,br,5346 Foothill Av,CA,(805)1357999,george@hotmail.com,8956,632-45-7900
+Ivan Stock,ivan,st,1235 Johnson Dr,NJ,(805)3223243,ivan@yahoo.com,2341,609-23-7900 
+Joe Pepsi,joe,pe,3210 State St,CA,(805)5668123,pepsi@pepsi.com,0456,646-76-3430
+Magic Jordon,magic,jo,3852 Court Rd,NJ,(805)4535539,jordon@jordon.org,3455,646-76-8843
+Olive Stoner,olive,st,6689 El Colegio #151,CA,(805)2574499,olive@yahoo.com,1123,645-34-7900
+Frank Olson,frank,ol,6910 Whittier Dr,CA,(805)3456789,frank@gmail.com,3306,345-23-2134
+
+
+STOCK INFORMATION
+==============
+
+TAXID,#OFSHARES(3/16/2013),ACTORID(STOCKID)
+1022,100,SKB
+3045,500,SMD
+3045,100,STC
+2034,250,STC
+4093,100,SKB
+4093,500,SMD
+4093,50,STC
+1234,1000,SMD
+8956,100,SKB
+2341,300,SMD
+0456,500,SKB
+0456,100,STC
+0456,200,SMD
+3455,1000,SKB
+1123,100,SKB
+1123,100,SMD
+1123,100,STC
+3306,100,SKB
+3306,200,STC
+3306,100,SMD
+
+MARKET INFORMATION
+===============
+
+TAXID,MARKET,ACCOUNTID,BALANCE($)
+1022,001,10000
+3045,002,100000
+2034,003,50000
+4093,004,45000
+1234,005,200000
+8956,006,5000
+2341,007,2000
+0456,008,10000
+3455,009,130200
+1123,010,35000
+3306,011,30500
+
+ACTORS-STOCK-INFO
+=================
+
+ACTORID(STOCKID),CURRENTPRICE(3/16/2013),NAME,DOB,MovieTitle,Role,Year,Contract
+SKB,40.00,Kim Basinger,8 December 1958,L.A. Confidential,Actor,1997,5000000
+SMD,71.00,Michael Douglas,25 September 1944,A Perfect Murder,Actor,1998,10000000
+STC,32.50,Tom Cruise,3 July 1962,Jerry Maguire,Actor,1996,5000000
+
