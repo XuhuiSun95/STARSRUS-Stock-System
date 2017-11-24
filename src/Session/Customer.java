@@ -191,8 +191,11 @@ public class Customer extends Session{
         AccountStock_DB.add_shares(taxID, -amount, actorID);
         AccountMarket_DB.add_balance(marketAccountID, price*amount-20);
 
+        double avg = AccountStock_DB.get_avg();
 
-        StockTransaction.record_transaction(Utility.date(), taxID, actorID, price, amount, 0);
+        double profit = price*amount - avg*amount;
+
+        StockTransaction.record_transaction(Utility.date(), taxID, actorID, price, amount, profit);
     }
 
     public void show_balance(){

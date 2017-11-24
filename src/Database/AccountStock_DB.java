@@ -49,6 +49,28 @@ public class AccountStock_DB{
         return res;
     }
 
+    public static double get_avg(String taxID, String actorID){
+        String QUERY =  "SELECT S.shares " +
+                        "FROM StockAccounts S " +
+                        "WHERE S.TAXID = " + "'" + taxID + "'" + " " +
+                        "AND S.actorID = " + "'" + actorID + "'";
+
+        ResultSet resultSet = Utility.sql_query(QUERY);
+
+        double res = -1.0;
+
+        try{
+            if(!resultSet.next()){
+                return -1.0;
+            }
+            res = resultSet.getDouble("avg");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return res;
+    }
+
     public static void add_shares(String taxID, int amount, String actorID, double price){
         String QUERY =  "SELECT * " +
                         "FROM StockAccounts " +
