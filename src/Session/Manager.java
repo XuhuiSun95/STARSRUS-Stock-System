@@ -3,6 +3,7 @@ package Session;
 import Utility.Utility;
 import java.sql.*;
 import Database.*;
+import java.io.Console;
 
 public class Manager extends Session{
 
@@ -34,7 +35,7 @@ public class Manager extends Session{
                         break;
             case "5":   this.generate_customer_report();
                         break;
-            case "6":   this.delete_transcation();
+            case "6":   this.delete_transaction();
                         break;
             case "7":   Utility.logout = true;
                         break;
@@ -72,7 +73,7 @@ public class Manager extends Session{
             System.exit(1);
         }
 
-        String taxID = c.readLine("Please enter the tax ID of the customer:")
+        String taxID = c.readLine("Please enter the tax ID of the customer:");
 
         String name = Customer_DB.get_name(taxID);
         String email = Customer_DB.get_email(taxID);
@@ -87,7 +88,7 @@ public class Manager extends Session{
         String interestTransactions = InterestTransaction_DB.get_transactions(taxID);
 
         System.out.println("TaxID: " + taxID + " ,Name: " + name + " ,email: " + email + "\n");
-        System.out.println("Transcations");
+        System.out.println("Transactions");
         System.out.println(marketTransactions);
         System.out.println(stockTransactions);
         System.out.println(interestTransactions);
@@ -109,9 +110,9 @@ public class Manager extends Session{
         System.out.println("Customer Report:\n" + res);
     }
 
-    public void delete_transcation(){
-        MarketTransaction_DB.delete_transcation();
-        StockTransaction_DB.delete_transcation();
-        InterestTransaction.delete_transcation();
+    public void delete_transaction(){
+        MarketTransaction_DB.delete_transaction();
+        StockTransaction_DB.delete_transaction();
+        InterestTransaction_DB.delete_transaction();
     }
 }

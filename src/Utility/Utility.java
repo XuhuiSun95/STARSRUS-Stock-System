@@ -94,17 +94,4 @@ public class Utility{
         Date_DB.store_date(date);
     }
 
-
-
-    public static String transaction_type(int i){
-        switch(i) {
-            case 1: return "deposit";
-            case 2: return "withdrawl";
-            case 3: return "buy";
-            case 4: return "sell";
-            case 5: return "accure interest";
-            default: System.out.println("Invalid data detected! Check the database!")
-                    System.exit(2);
-        }
-    }
 }

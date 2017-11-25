@@ -77,11 +77,11 @@ public class AccountStock_DB{
                         "WHERE actorID = " + "'" + actorID + "'";
         ResultSet resultSet = Utility.sql_query(QUERY);
         String UPDATE = "";
-        int temp = (new Integer(amount)).toString();
+        String temp = (new Integer(amount)).toString();
         try {
             if(resultSet.next()){
                 UPDATE =    "UPDATE StockAccounts "
-                            + "SET avg = (avg*shares + " + price*temp + ") / (shares +" + temp + ") "
+                            + "SET avg = (avg*shares + " + String.valueOf(price*amount) + ") / (shares +" + temp + ") "
                             + "WHERE taxID = " + "'" + taxID + "'";
                 Utility.sql_update(UPDATE);
 
@@ -91,8 +91,8 @@ public class AccountStock_DB{
                 Utility.sql_update(UPDATE);
             } else {
                 UPDATE =    "INSERT INTO StockAccounts " +
-                            "VALUES('" + taxID + "'," + (new Integer(amount)).toString() +
-                            ",'" + actorID + "')";
+                            "VALUES('" + taxID + "'," + temp +
+                            ",'" + actorID + "'," + price + ")";
                 Utility.sql_update(UPDATE);
             }
         } catch (Exception e) {

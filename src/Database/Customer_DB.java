@@ -80,7 +80,7 @@ public class Customer_DB{
                 Statement saved = Utility.statement;
                 Utility.statement = Utility.connection.createStatement();
                 
-                int total = StockTransaction_DB.get_total_shares();
+                int total = StockTransaction_DB.get_total_shares(taxID);
 
                 Utility.statement.close();
                 Utility.statement = saved;

@@ -2,24 +2,25 @@ package Database;
 
 import Utility.Utility;
 import java.sql.*;
+import java.lang.*;
 
 
 public class StockTransaction_DB{
-    public static void record_transaction(String date, String costumerTAXID, String actorID, double price, int shares, double profit){
-        String UPDATE = "INSERT INTO StockTransaction " +
+    public static void record_transaction(String date, String customerTAXID, String actorID, double price, int shares, double profit){
+        String UPDATE = "INSERT INTO StockTransactions " +
                         "VALUES(" + "'" + date + "'" + ","
-                                + "'" + costumerTAXID + "'" + ","
+                                + "'" + customerTAXID + "'" + ","
                                 + "'" + actorID + "'" + ","
                                 + price + ","
                                 + shares + ","
-                                + profit ;
+                                + profit + ")";
 
         Utility.sql_update(UPDATE);
     }
 
-    public static void delete_transcation(){
+    public static void delete_transaction(){
         String UPDATE = "DELETE * " +
-                        "FROM StockTranscations ";
+                        "FROM StockTransactions ";
         Utility.sql_update(UPDATE);
     }
 
@@ -27,8 +28,8 @@ public class StockTransaction_DB{
 
     public static int get_total_shares(String taxID){
         String QUERY =  "SELECT * " +
-                        "FROM StockTranscations " +
-                        "WHERE T.taxID = " + "'" + taxID + "'";
+                        "FROM StockTransactions " +
+                        "WHERE CustomerTAXID = " + "'" + taxID + "'";
 
         ResultSet resultSet = Utility.sql_query(QUERY);
 
@@ -37,7 +38,7 @@ public class StockTransaction_DB{
             while(resultSet.next()){
                 int shares = resultSet.getInt("shares");
 
-                sum += abs(shares);
+                sum += Math.abs(shares);
             }
         } catch(Exception e){
             e.printStackTrace();
@@ -50,8 +51,8 @@ public class StockTransaction_DB{
 
     public static String get_transactions(String taxID){
         String QUERY =  "SELECT * " +
-                        "FROM StockTranscations " +
-                        "WHERE T.taxID = " + "'" + taxID + "'";
+                        "FROM StockTransactions " +
+                        "WHERE CustomerTAXID = " + "'" + taxID + "'";
 
         ResultSet resultSet = Utility.sql_query(QUERY);
 
@@ -60,7 +61,7 @@ public class StockTransaction_DB{
         try{
             while(resultSet.next()){
                 String date = resultSet.getString("date");
-                String costumerTAXID = resultSet.getString("costumerTAXID");
+                String customerTAXID = resultSet.getString("customerTAXID");
                 String actorID = resultSet.getString("actorID");
                 double price = resultSet.getDouble("price");
                 int shares = resultSet.getInt("shares");
@@ -68,7 +69,8 @@ public class StockTransaction_DB{
 
 
                 res += "Date: " + date;
-                res += ", costumer TaxID: "  + costumerTAXID;
+                res += ", Transaction type: " + ((shares>0) ? "Buy" : "Sell");
+                res += ", customer TaxID: "  + customerTAXID;
                 res += ", stock symbol: " + actorID;
                 res += ", price: " + (new Double(price)).toString();
                 res += ", shares: " + (new Integer(shares)).toString();

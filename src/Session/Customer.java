@@ -93,7 +93,7 @@ public class Customer extends Session{
         AccountMarket_DB.add_balance(marketAccountID, Double.parseDouble(amount));
 
         double balance = AccountMarket_DB.get_account_balance(marketAccountID);
-        MarketTransaction.add_transaction(Utility.datdate, taxID, Double.parseDouble(amount), balance)
+        MarketTransaction_DB.record_transaction(Utility.date, taxID, Double.parseDouble(amount), balance);
     }
 
     public void withdrawl(){
@@ -115,7 +115,7 @@ public class Customer extends Session{
         AccountMarket_DB.add_balance(marketAccountID, -amount);
 
         balance = AccountMarket_DB.get_account_balance(marketAccountID);
-        MarketTransaction.add_transaction(Utility.datdate, taxID, -amount, balance)
+        MarketTransaction_DB.record_transaction(Utility.date, taxID, -amount, balance);
     }
 
     public void buy(){
@@ -148,10 +148,10 @@ public class Customer extends Session{
             return;
         }
 
-        AccountStock_DB.add_shares(taxID, amount, actorID);
+        AccountStock_DB.add_shares(taxID, amount, actorID, price);
         AccountMarket_DB.add_balance(marketAccountID, -spent);
 
-        StockTransaction.record_transaction(Utility.date(), taxID, actorID, price, amount, 0);
+        StockTransaction_DB.record_transaction(Utility.date, taxID, actorID, price, amount, 0);
     }
 
 
@@ -188,14 +188,14 @@ public class Customer extends Session{
             return;
         }
 
-        AccountStock_DB.add_shares(taxID, -amount, actorID);
+        AccountStock_DB.add_shares(taxID, -amount, actorID, price);
         AccountMarket_DB.add_balance(marketAccountID, price*amount-20);
 
-        double avg = AccountStock_DB.get_avg();
+        double avg = AccountStock_DB.get_avg(taxID, actorID);
 
         double profit = price*amount - avg*amount;
 
-        StockTransaction.record_transaction(Utility.date(), taxID, actorID, price, amount, profit);
+        StockTransaction_DB.record_transaction(Utility.date, taxID, actorID, price, -amount, profit);
     }
 
     public void show_balance(){

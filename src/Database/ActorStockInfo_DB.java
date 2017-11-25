@@ -37,11 +37,11 @@ public class ActorStockInfo_DB{
 
     public static double get_price(String actorID){
         String QUERY =  "SELECT A.currentPrice " +
-                        "FROM ActorStockInfo A " +
+                        "FROM ActorsStockInfo A " +
                         "WHERE A.actorID = " + "'" + actorID + "'";
 
         ResultSet resultSet = Utility.sql_query(QUERY);
-        double res = 0;
+        double res = -1.0;
         try{
             if(!resultSet.next()){
                 return -1.0;

@@ -4,28 +4,28 @@ import Utility.Utility;
 import java.sql.*;
 
 
-public class InterestTransaction {
-    public static void record_transaction(String date, String costumerTAXID, String managerTAXID, double interest, double balance){
-        String UPDATE = "INSERT INTO InterestTransaction " +
+public class InterestTransaction_DB {
+    public static void record_transaction(String date, String customerTAXID, String managerTAXID, double interest, double balance){
+        String UPDATE = "INSERT INTO InterestTransactions " +
                         "VALUES(" + "'" + date + "'" + ","
-                                + "'" + costumerTAXID + "'" + ","
+                                + "'" + customerTAXID + "'" + ","
                                 + "'" + managerTAXID + "'" + ","
                                 + interest + ","
-                                + balance;
+                                + balance + ")";
 
         Utility.sql_update(UPDATE);
     }
 
-    public static void delete_transcation(){
+    public static void delete_transaction(){
         String UPDATE = "DELETE * " +
-                        "FROM InterestTranscations ";
+                        "FROM InterestTransactions ";
         Utility.sql_update(UPDATE);
     }
 
     public static String get_transactions(String taxID){
         String QUERY =  "SELECT * " +
-                        "FROM InterestTranscations " +
-                        "WHERE T.taxID = " + "'" + taxID + "'";
+                        "FROM InterestTransactions " +
+                        "WHERE CustomerTAXID = " + "'" + taxID + "'";
 
         ResultSet resultSet = Utility.sql_query(QUERY);
 
@@ -34,14 +34,15 @@ public class InterestTransaction {
         try{
             while(resultSet.next()){
                 String date = resultSet.getString("date");
-                String costumerTAXID = resultSet.getString("costumerTAXID");
+                String customerTAXID = resultSet.getString("customerTAXID");
                 String managerTAXID = resultSet.getString("managerTAXID");
                 double interest = resultSet.getDouble("interest");
                 double balance = resultSet.getDouble("balance");
 
 
                 res += "Date: " + date;
-                res += ", costumer TaxID: "  + costumerTAXID;
+                res += ", Transaction type: " + "Accrue-Interest";
+                res += ", customer TaxID: "  + customerTAXID;
                 res += ", manager TaxID: " + managerTAXID;
                 res += ", interest: " + (new Double(interest)).toString();
                 res += ", balance: " + (new Double(balance)).toString();
