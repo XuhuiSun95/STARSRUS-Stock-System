@@ -25,14 +25,14 @@ public class Date_DB{
             e.printStackTrace();
         }
 
-        String UPDATE = "DELETE * " +
-                        "FROM Date ";
-        Utility.sql_update(UPDATE);
-
         return date;
     }
 
     public static void store_date(String date){
+        String UPDATE = "DELETE * " +
+                        "FROM Date ";
+        Utility.sql_update(UPDATE);
+
         String UPDATE = "INSERT INTO Date " +
                         "VALUES(" + "'" + date + "'" + ")";
         Utility.sql_update(UPDATE);

@@ -9,6 +9,10 @@ public class main {
 
     public static void main(String[] args) {
         try {
+
+            // load Date
+            Utility.load_date();
+
             //  Register JDBC driver
             Class.forName(Utility.JDBC_DRIVER).newInstance();
 
@@ -19,7 +23,7 @@ public class main {
 
             //  Creat a session
             Session session = new Session();
-            
+
             System.out.println("System ON");
             Console c = System.console();
             if (c == null) {
@@ -74,6 +78,7 @@ public class main {
                 se.printStackTrace();
             }
         }
+        Utility.store_date();
         System.out.println("Goodbye!");
     }
 }
