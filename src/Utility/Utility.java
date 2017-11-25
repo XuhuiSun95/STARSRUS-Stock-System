@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import Database.*;
 import Session.Manager;
 import java.io.Console;
+import java.time.LocalDate;
 
 public class Utility{
     public static final int OPENTIME = 9;    // time for opening the market
@@ -84,46 +85,103 @@ public class Utility{
     //     date = LocalDate.now();
     // }
 
-    public static void set_date(String d){
-        int pass = Integer.parseInt(d.substring(4,6))-Integer.parseInt(date.substring(4,6));
-        if(pass>1){
-            System.out.println("cannot fast forward more than 1 month.\n");
-            return;
-        }else if(pass==1){
-            int year = Integer.parseInt(date.substring(0,4));
-            int month = Integer.parseInt(date.substring(4,6));
 
-            int daysInMonth;
-            switch (month) {
-                case 1: // fall through
-                case 3: // fall through
-                case 5: // fall through
-                case 7: // fall through
-                case 8: // fall through
-                case 10: // fall through
-                case 12:
-                    daysInMonth = 31;
-                    break;
-                case 2:
-                    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
-                        daysInMonth = 29;
-                    } else {
-                        daysInMonth = 28;
-                    }
-                    break;
-                default:
-                    // returns 30 even for nonexistant months
-                    daysInMonth = 30;
+    public static void set_date(String d){
+        // int pass = Integer.parseInt(d.substring(4,6))-Integer.parseInt(date.substring(4,6));
+        // if(pass>1){
+        //     System.out.println("cannot fast forward more than 1 month.\n");
+        //     return;
+        // }else if(pass==1){
+        //     int year = Integer.parseInt(date.substring(0,4));
+        //     int month = Integer.parseInt(date.substring(4,6));
+        //
+        //     int daysInMonth;
+        //     switch (month) {
+        //         case 1: // fall through
+        //         case 3: // fall through
+        //         case 5: // fall through
+        //         case 7: // fall through
+        //         case 8: // fall through
+        //         case 10: // fall through
+        //         case 12:
+        //             daysInMonth = 31;
+        //             break;
+        //         case 2:
+        //             if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
+        //                 daysInMonth = 29;
+        //             } else {
+        //                 daysInMonth = 28;
+        //             }
+        //             break;
+        //         default:
+        //             // returns 30 even for nonexistant months
+        //             daysInMonth = 30;
+        //     }
+        //     date = date.substring(0,6) + String.valueOf(daysInMonth);
+        //     store_date();
+        //     Manager M = new Manager();
+        //     M.add_interest();
+        //     M.delete_transaction();
+        // }
+        int oldYear = Integer.parseInt(date.substring(0,4));
+        int oldMonth = Integer.parseInt(date.substring(4,6));
+        int oldYay = Integer.parseInt(date.substring(6,8));
+
+        int newYear = Integer.parseInt(date.substring(0,4));
+        int newMonth = Integer.parseInt(date.substring(4,6));
+        int newDay = Integer.parseInt(date.substring(6,8));
+
+
+        LocalDate old = LocalDate(oldYear, oldMonth, oldDay);
+        LocalDate new = LocalDate(newYear, newMonth, newDay);
+
+
+        while(!old.equals(new)){
+            int year = old.getYear();
+            int month = old.getMonthValue();
+            int day = old.getDayofMonth();
+
+            String temp = (new Integer(year)).toString() + (new Integer(month)).toString() + (new Integer(day)).toString();
+
+            if(day == old.lengthOfMonth()){
+                Manager M = new Manager();
+                M.add_interest();
+                M.delete_transaction();
+                System.out.println("Interests added for this month. Date:" + temp);
+                System.out.println("Transactions of this month deleted. Date:" + temp);
             }
-            date = date.substring(0,6) + String.valueOf(daysInMonth);
-            store_date();
-            Manager M = new Manager();
-            M.add_interest();
-            M.delete_transaction();
+
+
+            String QUERY =  "SELECT * " +
+                            "FROM ActorsStockInfo";
+
+            ResultSet resultSet = Utility.sql_query(QUERY);
+
+            String res = "";
+            try{
+                while(resultSet.next()){
+                    String id = resultSet.getString("ACTORID");
+                    double price = resultSet.getDouble("CURRENTPRICE");
+
+                    Statement saved = Utility.statement;
+                    Utility.statement = Utility.connection.createStatement();
+
+                    StockHistory_DB.record_history(temp, id, price)
+
+                    Utility.statement.close();
+                    Utility.statement = saved;
+                }
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+
+            old = old.plusDay(1);
         }
+
         date = d;
         store_date();
     }
+
 
     public static void load_date(){
         date = Date_DB.load_date();
