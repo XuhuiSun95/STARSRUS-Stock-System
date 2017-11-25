@@ -6,6 +6,23 @@ import java.sql.ResultSet;
 
 public class Customer_DB{
 
+    public static Boolean username_exist(String username){
+        String QUERY =  "SELECT * " +
+                        "FROM Customers C " +
+                        "WHERE C.username = " + "'" + username + "'";
+
+        ResultSet resultSet = Utility.sql_query(QUERY);
+
+        try{
+            if(!resultSet.next()){
+                return true;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static String get_tax_id(String username, String password){
         String QUERY =  "SELECT * " +
                         "FROM Customers C " +
