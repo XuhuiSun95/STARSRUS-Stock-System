@@ -48,9 +48,10 @@ public class main {
             session.login();
 
             while(!Utility.logout){
+                Utility.load_date();
                 session.single_round_process();
             }
-            
+
             Utility.store_date();
 
             //  Clean-up environment
