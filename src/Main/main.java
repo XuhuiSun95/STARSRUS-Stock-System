@@ -33,7 +33,7 @@ public class main {
             }
 
             System.out.println("login as : 1.Customer 2.Manager 3.Admin");
-            System.out.println("4.Sign up as new customer")
+            System.out.println("4.Sign up as new customer");
             String input = c.readLine("enter the number:");
 
             switch (input){
@@ -49,10 +49,11 @@ public class main {
             }
 
             if(session == null){
-
-
-
-                session = new Customer();
+                if(!Utility.sign_up()){
+                    System.out.println("System exit.\n");
+                    System.exit(1);
+                } else
+                    session = new Customer();
             }
 
             session.login();

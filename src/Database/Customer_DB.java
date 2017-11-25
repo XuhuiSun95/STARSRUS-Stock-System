@@ -23,6 +23,45 @@ public class Customer_DB{
         return false;
     }
 
+    public static Boolean taxid_exist(String taxid){
+        String QUERY =  "SELECT * " +
+                        "FROM Customers C " +
+                        "WHERE C.taxID = " + "'" + taxid + "'";
+
+        ResultSet resultSet = Utility.sql_query(QUERY);
+
+        try{
+            if(!resultSet.next()){
+                return true;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static Boolean ssn_exist(String ssn){
+        String QUERY =  "SELECT * " +
+                        "FROM Customers C " +
+                        "WHERE C.ssn = " + "'" + ssn + "'";
+
+        ResultSet resultSet = Utility.sql_query(QUERY);
+
+        try{
+            if(!resultSet.next()){
+                return true;
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static void insert_new_user(String name, String username, String password, String address, String state, String phone, String email, String taxid, String ssn){
+        String UPDATE = "INSERT INTO Customers VALUES("
+
+    }
+
     public static String get_tax_id(String username, String password){
         String QUERY =  "SELECT * " +
                         "FROM Customers C " +

@@ -2,7 +2,7 @@ package Utility;
 
 import java.sql.*;;
 import java.sql.ResultSet;
-import Database.Date_DB;
+import Database.*;
 import Session.Manager;
 import java.io.Console;
 
@@ -149,14 +149,29 @@ public class Utility{
             return false;
         }
 
-        String username = c.readLine("Password: ");
         String taxID = c.readLine("TaxID: ");
+
+        if(Customer_DB.taxid_exist(taxID)){
+            System.out.println("TaxID already exist.\n");
+            return false;
+        }
+
+        String ssn = c.readLine("ssn: ");
+
+        if(Customer_DB.ssn_exist(ssn)){
+            System.out.println("SSN already exist.\n");
+            return false;
+        }
+
+        String password = c.readLine("Password: ");
+        String name = c.readLine("Name: ");
         String address = c.readLine("Address: ");
         String STATE = c.readLine("STATE: ");
         String phone = c.readLine("Phone: ");
         String email = c.readLine("Email: ");
-        String ssn = c.readLine("ssn: ");
 
+        Customer_DB.insert_new_user(name, username, password, address, STATE, phone, email, taxID, ssn);
+        return true;
     }
 
 }
