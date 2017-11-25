@@ -53,7 +53,7 @@ public class main {
                     System.out.println("System exit.\n");
                     System.exit(1);
                 } else {
-                    System.out.println("You have successfully registered.\n"
+                    System.out.println("You have successfully registered.\n");
                     session = new Customer();
                 }
             }

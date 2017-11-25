@@ -56,3 +56,4 @@ INSERT INTO ActorsStockInfo (ACTORID,CURRENTPRICE,NAME,DOB,MovieTitle,Role,Year,
 CREATE TABLE StockTransactions (DATE varchar(8),CustomerTAXID varchar(4),actorID varchar(3),PRICE DOUBLE,SHARES INT,PROFIT DOUBLE);
 CREATE TABLE MarketTransactions (DATE varchar(8),CustomerTAXID varchar(4),AMOUNT DOUBLE,BALANCE DOUBLE);
 CREATE TABLE InterestTransactions (DATE varchar(8), CustomerTAXID varchar(4), ManagerTAXID varchar(4), INTEREST DOUBLE, BALANCE DOUBLE);
+CREATE TABLE StocksHistory (DATE varchar(8), ACTORID varchar(3), PRICE DOUBLE);

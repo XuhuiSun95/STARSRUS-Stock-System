@@ -125,21 +125,21 @@ public class Utility{
         // }
         int oldYear = Integer.parseInt(date.substring(0,4));
         int oldMonth = Integer.parseInt(date.substring(4,6));
-        int oldYay = Integer.parseInt(date.substring(6,8));
+        int oldDay = Integer.parseInt(date.substring(6,8));
 
-        int newYear = Integer.parseInt(date.substring(0,4));
-        int newMonth = Integer.parseInt(date.substring(4,6));
-        int newDay = Integer.parseInt(date.substring(6,8));
-
-
-        LocalDate old = LocalDate(oldYear, oldMonth, oldDay);
-        LocalDate new = LocalDate(newYear, newMonth, newDay);
+        int newYear = Integer.parseInt(d.substring(0,4));
+        int newMonth = Integer.parseInt(d.substring(4,6));
+        int newDay = Integer.parseInt(d.substring(6,8));
 
 
-        while(!old.equals(new)){
+        LocalDate old = LocalDate.of(oldYear, oldMonth, oldDay);
+        LocalDate new_date = LocalDate.of(newYear, newMonth, newDay);
+
+
+        while(old.isBefore(new_date)){
             int year = old.getYear();
             int month = old.getMonthValue();
-            int day = old.getDayofMonth();
+            int day = old.getDayOfMonth();
 
             String temp = (new Integer(year)).toString() + (new Integer(month)).toString() + (new Integer(day)).toString();
 
@@ -166,7 +166,7 @@ public class Utility{
                     Statement saved = Utility.statement;
                     Utility.statement = Utility.connection.createStatement();
 
-                    StockHistory_DB.record_history(temp, id, price)
+                    StockHistory_DB.record_history(temp, id, price);
 
                     Utility.statement.close();
                     Utility.statement = saved;
@@ -175,7 +175,7 @@ public class Utility{
                 e.printStackTrace();
             }
 
-            old = old.plusDay(1);
+            old = old.plusDays(1);
         }
 
         date = d;

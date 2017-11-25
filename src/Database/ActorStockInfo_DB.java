@@ -33,15 +33,15 @@ public class ActorStockInfo_DB{
 
 
                 res += "Acotr id: " + id;
-                res += " ,Price: " + price;
-                res += " ,Actor name: " + name;
-                res += " ,Date of Birth: " + dob;
-                res += " ,Moive Title: " + title;
-                res += " ,Role: " + role;
-                res += " ,Year: " + year;
-                res += " ,Contract:" + contract;
+                res += ", Price: " + price;
+                res += ", Actor name: " + name;
+                res += ", Date of Birth: " + dob;
+                res += ", Moive Title: " + title;
+                res += ", Role: " + role;
+                res += ", Year: " + year;
+                res += ", Contract:" + contract;
                 res += "\n";
-                res += "history";
+                res += history;
             }
         } catch(Exception e){
             e.printStackTrace();

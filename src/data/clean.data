@@ -8,3 +8,4 @@ DROP TABLE ActorsStockInfo;
 DROP TABLE StockTransactions;
 DROP TABLE MarketTransactions;
 DROP TABLE InterestTransactions;
+DROP TABLE StocksHistory;
