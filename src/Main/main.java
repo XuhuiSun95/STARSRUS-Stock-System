@@ -52,8 +52,10 @@ public class main {
                 if(!Utility.sign_up()){
                     System.out.println("System exit.\n");
                     System.exit(1);
-                } else
+                } else {
+                    System.out.println("You have successfully registered.\n"
                     session = new Customer();
+                }
             }
 
             session.login();

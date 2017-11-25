@@ -14,7 +14,7 @@ public class Customer_DB{
         ResultSet resultSet = Utility.sql_query(QUERY);
 
         try{
-            if(!resultSet.next()){
+            if(resultSet.next()){
                 return true;
             }
         } catch (Exception e){
@@ -31,7 +31,7 @@ public class Customer_DB{
         ResultSet resultSet = Utility.sql_query(QUERY);
 
         try{
-            if(!resultSet.next()){
+            if(resultSet.next()){
                 return true;
             }
         } catch (Exception e){
@@ -48,7 +48,7 @@ public class Customer_DB{
         ResultSet resultSet = Utility.sql_query(QUERY);
 
         try{
-            if(!resultSet.next()){
+            if(resultSet.next()){
                 return true;
             }
         } catch (Exception e){

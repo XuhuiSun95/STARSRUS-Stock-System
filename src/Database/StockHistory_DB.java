@@ -3,17 +3,17 @@ package Database;
 import Utility.Utility;
 import java.sql.*;
 
-public class StockHistory_DB(){
+public class StockHistory_DB{
     public static void record_history(String date, String actorID, double price){
-        UPDATE = "INSERT INTO StocksHistory " +
-                 "VALUES(" + "'" + date + "'" + ","
+        String UPDATE = "INSERT INTO StocksHistory " +
+                        "VALUES(" + "'" + date + "'" + ","
                         + "'" + actorID + "'" + ","
                         + price + ")";
         Utility.sql_update(UPDATE);
     }
 
 
-    public static void get_history(String actorID){
+    public static String get_history(String actorID){
         String QUERY =  "SELECT * " +
                         "FROM StocksHistory " +
                         "WHERE actorID = " + "'" + actorID + "'";
@@ -26,7 +26,7 @@ public class StockHistory_DB(){
                 String date = resultSet.getString("Date");
                 double price = resultSet.getDouble("price");
 
-                history += "\t" + "Date: " + date
+                history += "\t" + "Date: " + date;
                 history += ", Stock Symbol: " + actorID;
                 history += ", Closing Price: " + (new Double(price)).toString();
                 history += "\n";
@@ -34,5 +34,6 @@ public class StockHistory_DB(){
         } catch(Exception e){
             e.printStackTrace();
         }
+        return history;
     }
 }
