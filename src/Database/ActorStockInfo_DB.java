@@ -2,6 +2,7 @@ package Database;
 
 import Utility.Utility;
 import java.sql.*;
+import Database.StockHistory_DB;
 
 public class ActorStockInfo_DB{
     public static String list_all(){
@@ -22,11 +23,25 @@ public class ActorStockInfo_DB{
                 String year = resultSet.getString("Year");
                 Double contract = resultSet.getDouble("Contract");
 
-                res += "Acotr id: " + id + " ,Price: " + price
-                        + " ,Actor name: " + name + " ,Date of Birth: "
-                        + dob + " ,Moive Title: " + title + " ,Role: "
-                        + role + " ,Year: " + year + " ,Contract:"
-                        + contract + "\n";
+                Statement saved = Utility.statement;
+                Utility.statement = Utility.connection.createStatement();
+
+                String history = StockHistory_DB.get_history(id);
+
+                Utility.statement.close();
+                Utility.statement = saved;
+
+
+                res += "Acotr id: " + id;
+                res += " ,Price: " + price;
+                res += " ,Actor name: " + name;
+                res += " ,Date of Birth: " + dob;
+                res += " ,Moive Title: " + title;
+                res += " ,Role: " + role;
+                res += " ,Year: " + year;
+                res += " ,Contract:" + contract;
+                res += "\n";
+                res += "history";
             }
         } catch(Exception e){
             e.printStackTrace();
