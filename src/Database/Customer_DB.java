@@ -58,7 +58,11 @@ public class Customer_DB{
     }
 
     public static void insert_new_user(String name, String username, String password, String address, String state, String phone, String email, String taxid, String ssn){
-        String UPDATE = "INSERT INTO Customers VALUES("
+        String UPDATE = "INSERT INTO Customers(name, username, password, address, state, phone, email, taxid, ssn, active) VALUES(" +
+                        "'" + name + "','" + username + "','" + password + "','" + address + "','" + state + "','" + phone + "','" +
+                        email + "','" + taxid + "','" + ssn + "'," + String.valueOf(0) + ")";
+
+        Utility.sql_update(UPDATE);
 
     }
 
