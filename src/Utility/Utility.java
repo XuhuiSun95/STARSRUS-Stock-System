@@ -193,4 +193,20 @@ public class Utility{
         return true;
     }
 
+
+    public static Boolean check_active(String taxID){
+        if(Customer_DB.is_active()){
+            return true;
+        }
+
+        String accountID = Customer_DB.get_market_account_id();
+        double balance = AccountMarket_DB.get_account_balance(accountID);
+
+        if(balance >= 1000.0){
+            Customer_DB.active(taxID);
+            return true;
+        }
+
+        return false;
+    }
 }
