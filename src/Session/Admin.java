@@ -76,6 +76,13 @@ public class Admin extends Session{
             return;
         }
 
+        for(int i = 0; i < date.length(); i++){
+            if(!Character.isDigit(date.charAt(i))){
+                System.out.println("invalid input !");
+                return;
+            }
+        }
+
         int year = Integer.parseInt(date.substring(0,4));
         int month = Integer.parseInt(date.substring(4,6));
         int day = Integer.parseInt(date.substring(6,8));
@@ -108,7 +115,7 @@ public class Admin extends Session{
                 }
                 break;
             default:
-                // returns 30 even for nonexistant months 
+                // returns 30 even for nonexistant months
                 daysInMonth = 30;
         }
         if(day < 1 || day > daysInMonth){
