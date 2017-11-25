@@ -6,6 +6,35 @@ import java.sql.ResultSet;
 
 public class Customer_DB{
 
+    public static void active(String taxID){
+        String UPADTE = "UPDATE Customer " +
+                        "SET active = true " +
+                        "WHERE taxID = " + "'" + taxID + "'";
+        Utility.sql_update(UPDATE);
+    }
+
+    public static Boolean is_active(String taxID){
+        String QUERY =  "SELECT * " +
+                        "FROM Customers C " +
+                        "WHERE C.taxID = " + "'" + taxID + "'";
+
+        ResultSet resultSet = Utility.sql_query(QUERY);
+
+        try{
+            if(resultSet.next()){
+                if(resultSet.getBoolean("active")){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return false;
+
+    }
+
     public static Boolean username_exist(String username){
         String QUERY =  "SELECT * " +
                         "FROM Customers C " +

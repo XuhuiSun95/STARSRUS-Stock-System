@@ -129,7 +129,13 @@ public class Customer extends Session{
     }
 
     public void buy(){
-        if(Utility.marketState == false){
+
+        if(Utility.check_active() == false){
+            System.out.println("Not enough balance. Account State: Inactive.\n");
+            return;
+        }
+
+        if(Utility.market_is_open() == false){
             System.out.println("Market Closed.\n");
             return;
         }
@@ -171,7 +177,13 @@ public class Customer extends Session{
 
 
     public void sell(){
-        if(Utility.marketState == false){
+
+        if(Utility.check_active() == false){
+            System.out.println("Not enough balance. Account State: Inactive.\n");
+            return;
+        }
+
+        if(Utility.market_is_open() == false){
             System.out.println("Market Closed.\n");
             return;
         }
