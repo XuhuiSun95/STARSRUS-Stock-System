@@ -16,7 +16,7 @@ public class Date_DB{
 
         try{
             if(!resultSet.next()){
-                System.out.println("current date not found!\n");
+                System.out.println("current date not found!");
                 System.exit(1);
             }
 
@@ -29,12 +29,12 @@ public class Date_DB{
     }
 
     public static void store_date(String date){
-        String UPDATE = "DELETE " +
+        String UPDATE = "DELETE * " +
                         "FROM Date ";
         Utility.sql_update(UPDATE);
 
-        UPDATE = "INSERT INTO Date " +
-                 "VALUES(" + "'" + date + "'" + ")";
+        String UPDATE = "INSERT INTO Date " +
+                        "VALUES(" + "'" + date + "'" + ")";
         Utility.sql_update(UPDATE);
     }
 

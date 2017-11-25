@@ -70,59 +70,20 @@ public class Utility{
     }
 
     public static void open_market(){
-        marketState = true;
+        State_DB.open_market();
     }
 
     public static void close_market(){
-        marketState = false;
+        State_DB.close_market();
     }
 
     public static Boolean market_is_open(){
-        return marketState;
+        return State_DB.is_open();
     }
-
-    // public static void set_current_date(){
-    //     date = LocalDate.now();
-    // }
 
 
     public static void set_date(String d){
-        // int pass = Integer.parseInt(d.substring(4,6))-Integer.parseInt(date.substring(4,6));
-        // if(pass>1){
-        //     System.out.println("cannot fast forward more than 1 month.\n");
-        //     return;
-        // }else if(pass==1){
-        //     int year = Integer.parseInt(date.substring(0,4));
-        //     int month = Integer.parseInt(date.substring(4,6));
-        //
-        //     int daysInMonth;
-        //     switch (month) {
-        //         case 1: // fall through
-        //         case 3: // fall through
-        //         case 5: // fall through
-        //         case 7: // fall through
-        //         case 8: // fall through
-        //         case 10: // fall through
-        //         case 12:
-        //             daysInMonth = 31;
-        //             break;
-        //         case 2:
-        //             if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
-        //                 daysInMonth = 29;
-        //             } else {
-        //                 daysInMonth = 28;
-        //             }
-        //             break;
-        //         default:
-        //             // returns 30 even for nonexistant months
-        //             daysInMonth = 30;
-        //     }
-        //     date = date.substring(0,6) + String.valueOf(daysInMonth);
-        //     store_date();
-        //     Manager M = new Manager();
-        //     M.add_interest();
-        //     M.delete_transaction();
-        // }
+
         int oldYear = Integer.parseInt(date.substring(0,4));
         int oldMonth = Integer.parseInt(date.substring(4,6));
         int oldDay = Integer.parseInt(date.substring(6,8));
