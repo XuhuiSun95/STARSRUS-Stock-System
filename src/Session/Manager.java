@@ -19,7 +19,7 @@ public class Manager extends Session{
         options += "4: Generate Government Drug & Tax Evasion Report.\n";
         options += "5: Customer Report.\n";
         options += "6: Delete Transactions.\n";
-        options += "7: Exit";
+        options += "7: Exit.\n";
 
         System.out.println(options);
     }
@@ -41,7 +41,7 @@ public class Manager extends Session{
                         break;
             case "7":   Utility.logout = true;
                         break;
-            default:    System.out.println("Wrong input, please try again");
+            default:    System.out.println("Wrong input, please try again.\n");
         }
     }
 
@@ -96,7 +96,7 @@ public class Manager extends Session{
     public void generate_monthly_statement(){
         Console c = System.console();
         if (c == null) {
-            System.err.println("No console.");
+            System.err.println("No console.\n");
             System.exit(1);
         }
 

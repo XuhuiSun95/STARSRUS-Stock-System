@@ -15,7 +15,7 @@ public class AccountMarket_DB{
 
         try{
             if(!resultSet.next()){
-                System.err.println("No such taxID.");
+                System.err.println("No such taxID.\n");
                 System.exit(1);
             }
             res = resultSet.getString("accountID");
@@ -36,7 +36,7 @@ public class AccountMarket_DB{
 
         try{
             if(!resultSet.next()){
-                System.err.println("No such market account id.");
+                System.err.println("No such market account id.\n");
                 System.exit(1);
             }
             res = resultSet.getDouble("balance");

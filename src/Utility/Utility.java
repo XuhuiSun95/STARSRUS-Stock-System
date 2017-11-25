@@ -87,7 +87,7 @@ public class Utility{
     public static void set_date(String d){
         int pass = Integer.parseInt(d.substring(4,6))-Integer.parseInt(date.substring(4,6));
         if(pass>1){
-            System.out.println("cannot fast forward more than 1 month");
+            System.out.println("cannot fast forward more than 1 month.\n");
             return;
         }else if(pass==1){
             int year = Integer.parseInt(date.substring(0,4));
@@ -145,7 +145,7 @@ public class Utility{
         String username = c.readLine("Username: ");
 
         if(Customer_DB.username_exist(username)){
-            System.out.println("Username already exist");
+            System.out.println("Username already exist.\n");
             return false;
         }
 

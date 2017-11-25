@@ -24,10 +24,11 @@ public class main {
             //  Creat a session
             Session session = null;
 
+            System.out.println("----------------------------");
             System.out.println("System ON");
             Console c = System.console();
             if (c == null) {
-                System.err.println("No console.");
+                System.err.println("No console.\n");
                 System.exit(1);
             }
 
@@ -43,11 +44,11 @@ public class main {
                 case "3":   session = new Admin();
                             break;
                 case "4":   break;
-                default:    System.out.println("invalid input");
+                default:    System.out.println("invalid input\n");
                             System.exit(1);
             }
 
-            if(null){
+            if(session == null){
 
 
 

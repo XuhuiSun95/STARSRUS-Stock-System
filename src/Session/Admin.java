@@ -15,7 +15,7 @@ public class Admin extends Session{
         options += "2: Close Market.\n";
         options += "3: Set date.\n";
         options += "4: Set price.\n";
-        options += "5: Exit";
+        options += "5: Exit\n";
 
         System.out.println(options);
     }
@@ -65,20 +65,20 @@ public class Admin extends Session{
     public void set_date(){
         Console c = System.console();
         if (c == null) {
-            System.err.println("No console.");
+            System.err.println("No console.\n");
             System.exit(1);
         }
 
-        String date = c.readLine("Please enter the date in following form\n YYYYMMDD:");
+        String date = c.readLine("Please enter the date in following form YYYYMMDD:");
 
         if(date.length() != 8){
-            System.out.println("invalid input !");
+            System.out.println("invalid input! \n");
             return;
         }
 
         for(int i = 0; i < date.length(); i++){
             if(!Character.isDigit(date.charAt(i))){
-                System.out.println("invalid input !");
+                System.out.println("invalid input !\n");
                 return;
             }
         }
@@ -92,7 +92,7 @@ public class Admin extends Session{
 
         // check validity
         if(month > 12 || month < 1){
-            System.out.println("invalid input !");
+            System.out.println("invalid input!\n");
             return;
         }
 
@@ -119,14 +119,14 @@ public class Admin extends Session{
                 daysInMonth = 30;
         }
         if(day < 1 || day > daysInMonth){
-            System.out.println("invalid input !");
+            System.out.println("invalid input!\n");
             return;
         }
 
         if(year <= old_year){
             if(month <= old_month){
                 if(day <= old_day){
-                    System.out.println("invalid input !");
+                    System.out.println("invalid input!\n");
                     return;
                 }
             }
@@ -138,12 +138,12 @@ public class Admin extends Session{
     public void set_price(){
         Console c = System.console();
         if (c == null) {
-            System.err.println("No console.");
+            System.err.println("No console.\n");
             System.exit(1);
         }
 
         String symbol = c.readLine("Please enter the stock symbol:");
-        String temp = c.readLine("Please enter the price");
+        String temp = c.readLine("Please enter the price:");
         double price = Double.parseDouble(temp);
 
         ActorStockInfo_DB.update_price(symbol, price);
