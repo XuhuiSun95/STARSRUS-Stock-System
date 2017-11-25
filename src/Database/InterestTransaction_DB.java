@@ -16,6 +16,35 @@ public class InterestTransaction_DB {
         Utility.sql_update(UPDATE);
     }
 
+    public static double get_interest(String taxID){
+        String QUERY =  "SELECT * " +
+                        "FROM InterestTransactions " +
+                        "WHERE CustomerTAXID = " + "'" + taxID + "'";
+
+        ResultSet resultSet = Utility.sql_query(QUERY);
+
+        double res = -1.0;
+        try{
+            if(!resultSet.next()){
+                System.out.println("Calculate monthly interest before you calculate the tax!");
+                return -1.0;
+            }
+
+            res = resultSet.getDouble("interest");
+
+            if(resultSet.next()){
+                System.out.println("Invalid data in database: multiple interest info");
+                System.exit(2);
+            }
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return sum;
+    }
+
     public static void delete_transaction(){
         String UPDATE = "DELETE * " +
                         "FROM InterestTransactions ";

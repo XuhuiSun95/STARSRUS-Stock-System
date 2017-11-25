@@ -79,8 +79,8 @@ public class Customer_DB{
 
                 Statement saved = Utility.statement;
                 Utility.statement = Utility.connection.createStatement();
-                
-                int total = StockTransaction_DB.get_total_shares(taxID);
+
+                int total = StockTransaction_DB.get_total_shares();
 
                 Utility.statement.close();
                 Utility.statement = saved;
@@ -124,4 +124,37 @@ public class Customer_DB{
         return res;
     }
 
+
+
+    public static String get_DTER_list(){
+        String QUERY =  "SElECT * " +
+                        "FROM Customers";
+        ResultSet resultSet= Utility.sql_query(QUERY);
+        String res = "";
+        try{
+            while(resultSet.next()){
+                String username = resultSet.getString("username");
+                String taxID = resultSet.getString("TAXID");
+
+                Statement saved = Utility.statement;
+                Utility.statement = Utility.connection.createStatement();
+
+                double profit = StockTransaction_DB.get_total_profit(taxID);
+                profit += InterestTransaction_DB.get_interest(taxID);
+
+                Utility.statement.close();
+                Utility.statement = saved;
+
+                if(profit >= 10000){
+                res += "Username: " + username + " ,TAXID: " + taxID
+                        + " ,Market Account ID: " + marketAccountID
+                        + " ,balance: " + balance +
+                        + " ,Profit: " + profit + "\n";
+                }
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return res;
+    }
 }

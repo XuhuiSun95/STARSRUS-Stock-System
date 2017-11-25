@@ -47,7 +47,26 @@ public class StockTransaction_DB{
         return sum;
     }
 
+    public static double get_total_profit(String taxID){
+        String QUERY =  "SELECT * " +
+                        "FROM StockTransactions " +
+                        "WHERE CustomerTAXID = " + "'" + taxID + "'";
 
+        ResultSet resultSet = Utility.sql_query(QUERY);
+
+        double sum = 0;
+        try{
+            while(resultSet.next()){
+                double profit = resultSet.getDouble("profit");
+
+                sum += profit;
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return sum;
+    }
 
     public static String get_transactions(String taxID){
         String QUERY =  "SELECT * " +

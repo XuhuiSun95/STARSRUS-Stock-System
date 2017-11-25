@@ -95,19 +95,21 @@ public class Manager extends Session{
     }
 
     public void list_active_customers(){
-        String res = Customer_DB.list_active();
+        String active_customers_list = Customer_DB.list_active();
 
-        System.out.println("Active Customers:\n" + res);
+        System.out.println("Active Customers:\n" + active_customers_list);
     }
 
     public void generate_DTER(){
+        String DTER_list = Customer_DB.get_DTER_list();
 
+        System.out.println("Government Drug & Tax Evasion Report:\n" + DTER_list);
     }
 
     public void generate_customer_report(){
-        String res = Customer_DB.customer_report();
+        String customer_report = Customer_DB.customer_report();
 
-        System.out.println("Customer Report:\n" + res);
+        System.out.println("Customer Report:\n" + customer_report);
     }
 
     public void delete_transaction(){
