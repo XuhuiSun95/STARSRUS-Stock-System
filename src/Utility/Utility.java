@@ -21,7 +21,7 @@ public class Utility{
     public static String date;   // system date
     public static Boolean marketState; // open or closed
 
-    public static double interestRate = 0.1;
+    public static double interestRate = 0.03;
 
     public static Boolean logout = false; // logout flag
 

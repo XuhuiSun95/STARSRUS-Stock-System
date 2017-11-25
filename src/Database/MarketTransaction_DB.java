@@ -51,4 +51,32 @@ public class MarketTransaction_DB {
 
         return res;
     }
+
+    public static String get_average_balance(String taxID){
+        String QUERY =  "SELECT * " +
+                        "FROM MarketTransactions " +
+                        "WHERE CustomerTAXID = " + "'" + taxID + "'";
+
+        ResultSet resultSet = Utility.sql_query(QUERY);
+
+        String res = "";
+
+        try{
+            double balance = AccountMarket_DB.get_balance(taxID);
+            while(resultSet.next()){
+                String date = resultSet.getString("date");
+                double money = resultSet.getDouble("amount");
+                double balance = resultSet.getDouble("balance");
+
+                int month = Integer.parseInt(date.substring(4,6));
+                int day = Integer.parseInt(date.substring(6,8));
+                
+
+            } 
+
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return res;
 }
