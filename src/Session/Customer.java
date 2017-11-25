@@ -82,6 +82,11 @@ public class Customer extends Session{
 
     // operation deltails
     public void deposit(){
+        if(Utility.marketState == false){
+            System.out.println("Market Closed");
+            return;
+        }
+
         Console c = System.console();
         if (c == null) {
             System.err.println("No console.");
@@ -97,6 +102,11 @@ public class Customer extends Session{
     }
 
     public void withdrawl(){
+        if(Utility.marketState == false){
+            System.out.println("Market Closed");
+            return;
+        }
+
         Console c = System.console();
         if (c == null) {
             System.err.println("No console.");
@@ -119,6 +129,11 @@ public class Customer extends Session{
     }
 
     public void buy(){
+        if(Utility.marketState == false){
+            System.out.println("Market Closed");
+            return;
+        }
+
         Console c = System.console();
         if (c == null) {
             System.err.println("No console.");
@@ -156,6 +171,11 @@ public class Customer extends Session{
 
 
     public void sell(){
+        if(Utility.marketState == false){
+            System.out.println("Market Closed");
+            return;
+        }
+
         Console c = System.console();
         if (c == null) {
             System.err.println("No console.");
