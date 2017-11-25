@@ -22,7 +22,7 @@ public class main {
             Utility.load_date();
 
             //  Creat a session
-            Session session = new Session();
+            Session session = null;
 
             System.out.println("System ON");
             Console c = System.console();
@@ -32,6 +32,7 @@ public class main {
             }
 
             System.out.println("login as : 1.Customer 2.Manager 3.Admin");
+            System.out.println("4.Sign up as new customer")
             String input = c.readLine("enter the number:");
 
             switch (input){
@@ -41,8 +42,16 @@ public class main {
                             break;
                 case "3":   session = new Admin();
                             break;
+                case "4":   break;
                 default:    System.out.println("invalid input");
                             System.exit(1);
+            }
+
+            if(null){
+
+
+
+                session = new Customer();
             }
 
             session.login();

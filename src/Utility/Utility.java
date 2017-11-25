@@ -3,6 +3,7 @@ package Utility;
 import java.sql.*;;
 import java.sql.ResultSet;
 import Database.Date_DB;
+import java.io.Console;
 
 public class Utility{
     public static final int OPENTIME = 9;    // time for opening the market
@@ -93,6 +94,32 @@ public class Utility{
 
     public static void store_date(){
         Date_DB.store_date(date);
+    }
+
+
+
+    public static Boolean sign_up(){
+        Console c = System.console();
+        if (c == null) {
+            System.err.println("No console.");
+            System.exit(1);
+        }
+
+        String username = c.readLine("Username: ");
+
+        if(Customer_DB.username_exist(username)){
+            System.out.println("Username already exist");
+            return false;
+        }
+
+        String username = c.readLine("Password: ");
+        String taxID = c.readLine("TaxID: ");
+        String address = c.readLine("Address: ");
+        String STATE = c.readLine("STATE: ");
+        String phone = c.readLine("Phone: ");
+        String email = c.readLine("Email: ");
+        String ssn = c.readLine("ssn: ");
+
     }
 
 }
