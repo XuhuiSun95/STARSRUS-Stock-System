@@ -229,6 +229,7 @@ public class Utility{
         String email = c.readLine("Email: ");
 
         Customer_DB.insert_new_user(name, username, password, address, STATE, phone, email, taxID, ssn);
+        AccountMarket_DB.insert_new_account(taxID);
         return true;
     }
 

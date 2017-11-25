@@ -5,6 +5,25 @@ import java.sql.*;
 
 public class AccountMarket_DB{
 
+    public static void insert_new_account(String taxID){
+        String QUERY = "SELECT accountid FROM MarketAccounts ORDER BY accountid DESC";
+        ResultSet rs = Utility.sql_query(QUERY);
+
+        String new_id = "001";
+        try{
+            if(rs.next()){
+                String id = rs.getString("accountid");
+                new_id = String.format("%03d", (Integer.valueOf(id) + 1));
+            }
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+        String UPDATE = "INSERT INTO MarketAccounts(taxid,accountid,balance) VALUE('" + taxID +
+                        "','" + new_id + "'," + String.valueOf(0) + ")";
+        Utility.sql_update(UPDATE);
+    }
+
     public static String get_market_account_id(String taxID){
         String QUERY =  "SELECT M.accountID " +
                         "FROM MarketAccounts M " +
