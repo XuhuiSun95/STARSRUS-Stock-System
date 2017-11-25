@@ -89,11 +89,11 @@ public class StockTransaction_DB{
 
                 res += "Date: " + date;
                 res += ", Transaction type: " + ((shares>0) ? "Buy" : "Sell");
-                res += ", customer TaxID: "  + customerTAXID;
-                res += ", stock symbol: " + actorID;
-                res += ", price: " + (new Double(price)).toString();
-                res += ", shares: " + (new Integer(shares)).toString();
-                res += ", profit: " + (new Double(profit)).toString();
+                res += ", Customer TaxID: "  + customerTAXID;
+                res += ", Stock symbol: " + actorID;
+                res += ", Price: " + (new Double(price)).toString();
+                res += ", Shares: " + (new Integer(shares)).toString();
+                res += ", Profit: " + (new Double(profit)).toString();
                 res += "\n";
             }
         } catch(Exception e){

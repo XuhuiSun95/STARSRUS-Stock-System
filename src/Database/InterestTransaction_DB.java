@@ -71,10 +71,10 @@ public class InterestTransaction_DB {
 
                 res += "Date: " + date;
                 res += ", Transaction type: " + "Accrue-Interest";
-                res += ", customer TaxID: "  + customerTAXID;
-                res += ", manager TaxID: " + managerTAXID;
-                res += ", interest: " + (new Double(interest)).toString();
-                res += ", balance: " + (new Double(balance)).toString();
+                res += ", Customer TaxID: "  + customerTAXID;
+                res += ", Manager TaxID: " + managerTAXID;
+                res += ", Interest: " + (new Double(interest)).toString();
+                res += ", Balance: " + (new Double(balance)).toString();
                 res += "\n";
             }
         } catch(Exception e){

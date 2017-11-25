@@ -41,9 +41,9 @@ public class MarketTransaction_DB {
 
                 res += "Date: " + date;
                 res += ", Transaction type: " + ((money>0) ? "Deposit" : "Withdrawal");
-                res += ", customer TaxID: "  + customerTAXID;
-                res += ", amount: " + (new Double(money)).toString();
-                res += ", balance: " + (new Double(balance)).toString();
+                res += ", Customer TaxID: "  + customerTAXID;
+                res += ", Amount: " + (new Double(money)).toString();
+                res += ", Balance: " + (new Double(balance)).toString();
                 res += "\n";
             }
         } catch(Exception e){
@@ -55,7 +55,7 @@ public class MarketTransaction_DB {
 
     public static double get_average_balance(String taxID){
         double new_balance = AccountMarket_DB.get_account_balance(AccountMarket_DB.get_market_account_id(taxID));
-        
+
         String QUERY =  "SELECT * " +
                         "FROM MarketTransactions " +
                         "WHERE CustomerTAXID = " + "'" + taxID + "'";
@@ -87,7 +87,7 @@ public class MarketTransaction_DB {
         } catch(Exception e){
             e.printStackTrace();
         }
-        
+
         return total_balance;
     }
 }
