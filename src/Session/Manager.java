@@ -7,6 +7,8 @@ import java.io.Console;
 
 public class Manager extends Session{
 
+    private String taxID;
+
     // Override virtual function from super class
     @Override
     public void display_operations(){
@@ -54,6 +56,8 @@ public class Manager extends Session{
             if (!resultSet.next() ) {
                 return false;
             }
+
+            taxID = resultSet.getString("taxID");
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -63,7 +67,29 @@ public class Manager extends Session{
 
     // operation deltails
     public void add_interest(){
+        String QUERY =  "SElECT * " +
+                        "FROM Customers ";
 
+        ResultSet resultSet = Utility.sql_query(QUERY);
+
+        try{
+            while(resultSet.next()){
+                string customerTAXID = resultSet.getString("taxID");
+                double balance = resultSet.getDouble("balance");
+                double interest = 0;
+
+
+
+
+
+
+
+                InterestTransaction_DB.record(Utility.date, customerTAXID, taxID, interest, balance+interest);
+            }
+
+        } catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void generate_monthly_statement(){
