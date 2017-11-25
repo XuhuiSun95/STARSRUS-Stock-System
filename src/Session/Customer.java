@@ -22,7 +22,7 @@ public class Customer extends Session{
         options += "6: Show Transaction history.\n";
         options += "7: List Stock Info.\n";
         options += "8: List Moive Info. \n";
-        options += "9: Exit";
+        options += "9: Exit\n";
 
         System.out.println(options);
     }
@@ -108,7 +108,7 @@ public class Customer extends Session{
         double balance = AccountMarket_DB.get_account_balance(marketAccountID);
 
         if(balance < amount){
-            System.out.println("Request denied! Not enough balance!");
+            System.out.println("Request denied! Not enough balance!\n");
             return;
         }
 
@@ -127,24 +127,24 @@ public class Customer extends Session{
 
         String actorID = c.readLine("Stock you want to buy:");
         if(actorID.length() != 3){
-            System.out.println("Invalid Stock symbol");
+            System.out.println("Invalid Stock symbol\n");
             return;
         }
 
         double price = ActorStockInfo_DB.get_price(actorID);
         if(price == -1.0){
-            System.out.println("No such stock!");
+            System.out.println("No such stock!\n");
             return;
         }
 
-        String temp = c.readLine("Amount you want to buy");
+        String temp = c.readLine("Amount you want to buy:");
         int amount = Integer.parseInt(temp);
 
         double spent = amount * price + 20;
 
         double balance = AccountMarket_DB.get_account_balance(marketAccountID);
         if(spent > balance){
-            System.out.println("Request denied! Not enough balance");
+            System.out.println("Request denied! Not enough balance\n");
             return;
         }
 
@@ -164,36 +164,44 @@ public class Customer extends Session{
 
         String actorID = c.readLine("Stock you want to buy:");
         if(actorID.length() != 3){
-            System.out.println("Invalid Stock symbol");
+            System.out.println("Invalid Stock symbol\n");
             return;
         }
 
         int shares = AccountStock_DB.get_shares(taxID, actorID);
         if(shares == -1){
-            System.out.println("No such stock!");
+            System.out.println("No such stock!\n");
             return;
         }
 
         double price = ActorStockInfo_DB.get_price(actorID);
         if(price == -1.0){
-            System.out.println("No such stock!");
+            System.out.println("No such stock!\n");
             return;
         }
 
-        String temp = c.readLine("Amount you want to sell");
+        String temp = c.readLine("Amount you want to sell:");
         int amount = Integer.parseInt(temp);
 
         if(amount > shares){
-            System.out.println("Not enough shares");
+            System.out.println("Not enough shares\n");
             return;
         }
+
+        double avg = AccountStock_DB.get_avg(taxID, actorID);
 
         AccountStock_DB.add_shares(taxID, -amount, actorID, price);
         AccountMarket_DB.add_balance(marketAccountID, price*amount-20);
 
-        double avg = AccountStock_DB.get_avg(taxID, actorID);
+        double profit = price*amount - avg*amount - 20;
+        System.out.print("price:");
+        System.out.println(price);
+        System.out.print("avg:");
+        System.out.println(avg);
+        System.out.print("profit:");
+        System.out.println(profit);
 
-        double profit = price*amount - avg*amount;
+
 
         StockTransaction_DB.record_transaction(Utility.date, taxID, actorID, price, -amount, profit);
     }

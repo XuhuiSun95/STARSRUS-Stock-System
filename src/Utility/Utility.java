@@ -84,7 +84,7 @@ public class Utility{
 
     public static void set_date(String d){
         date = d;
-        store_date(date);
+        store_date();
     }
 
     public static void load_date(){

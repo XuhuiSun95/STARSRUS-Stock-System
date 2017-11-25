@@ -74,7 +74,7 @@ public class Manager extends Session{
 
         try{
             while(resultSet.next()){
-                string customerTAXID = resultSet.getString("taxID");
+                String customerTAXID = resultSet.getString("taxID");
                 double balance = resultSet.getDouble("balance");
                 double interest = 0;
 
@@ -84,7 +84,7 @@ public class Manager extends Session{
 
 
 
-                InterestTransaction_DB.record(Utility.date, customerTAXID, taxID, interest, balance+interest);
+                InterestTransaction_DB.record_transaction(Utility.date, customerTAXID, taxID, interest, balance+interest);
             }
 
         } catch(Exception e){

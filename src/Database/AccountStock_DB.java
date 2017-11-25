@@ -74,24 +74,36 @@ public class AccountStock_DB{
     public static void add_shares(String taxID, int amount, String actorID, double price){
         String QUERY =  "SELECT * " +
                         "FROM StockAccounts " +
-                        "WHERE actorID = " + "'" + actorID + "'";
+                        "WHERE actorID = " + "'" + actorID + "'" + " AND taxID = '" + taxID + "'";
         ResultSet resultSet = Utility.sql_query(QUERY);
         String UPDATE = "";
-        String temp = (new Integer(amount)).toString();
         try {
             if(resultSet.next()){
-                UPDATE =    "UPDATE StockAccounts "
-                            + "SET avg = (avg*shares + " + String.valueOf(price*amount) + ") / (shares +" + temp + ") "
-                            + "WHERE taxID = " + "'" + taxID + "'";
-                Utility.sql_update(UPDATE);
+                int shares = resultSet.getInt("shares");
+                double avg = resultSet.getDouble("avg");
+                if(shares == -amount) {
+                    UPDATE = "DELETE from StockAccounts WHERE actorID = " + "'" + actorID + "'" + " AND taxID = '" + taxID + "'";
+                    Utility.sql_update(UPDATE);
+                }
+                else {
+                    int new_shares = shares + amount;
+                    if(amount>0){
+                        double new_avg = (avg*shares + price*amount)/(new_shares);
 
-                UPDATE =    "UPDATE StockAccounts "
-                            + "SET shares = shares " + temp + " "
-                            + "WHERE taxID = " + "'" + taxID + "'";
-                Utility.sql_update(UPDATE);
+                        UPDATE = "UPDATE StockAccounts "
+                                + "SET avg = " + String.valueOf(new_avg) + ", shares = " + String.valueOf(new_shares) + " "
+                                + "WHERE actorID = " + "'" + actorID + "'" + " AND taxID = '" + taxID + "'";
+                        Utility.sql_update(UPDATE);
+                    } else {
+                        UPDATE = "UPDATE StockAccounts "
+                                + "SET shares = " + String.valueOf(new_shares) + " "
+                                + "WHERE actorID = " + "'" + actorID + "'" + " AND taxID = '" + taxID + "'";
+                        Utility.sql_update(UPDATE);
+                    }
+                }
             } else {
                 UPDATE =    "INSERT INTO StockAccounts " +
-                            "VALUES('" + taxID + "'," + temp +
+                            "VALUES('" + taxID + "'," + String.valueOf(amount) +
                             ",'" + actorID + "'," + price + ")";
                 Utility.sql_update(UPDATE);
             }

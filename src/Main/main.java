@@ -48,6 +48,7 @@ public class main {
             session.login();
 
             while(!Utility.logout){
+                System.out.println("=========================================");
                 Utility.load_date();
                 session.single_round_process();
             }

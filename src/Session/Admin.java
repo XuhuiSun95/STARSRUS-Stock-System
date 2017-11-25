@@ -139,6 +139,6 @@ public class Admin extends Session{
         String temp = c.readLine("Please enter the price");
         double price = Double.parseDouble(temp);
 
-        ActorStockInfo_DB.update_price(temp, price);
+        ActorStockInfo_DB.update_price(symbol, price);
     }
 }
