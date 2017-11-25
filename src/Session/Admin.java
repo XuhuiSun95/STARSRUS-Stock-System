@@ -39,7 +39,7 @@ public class Admin extends Session{
 
     @Override
     public Boolean verify_login(String username, String password){
-        String QUERY = "SELECT * FROM Admin A WHERE A.username =" + " ' " + username + " ' " + "AND A.password = " + " ' " + password + " ' ";
+        String QUERY = "SELECT * FROM Admin A WHERE A.username = " + "'" + username + "'" + " AND A.password = " + "'" + password + "'";
         ResultSet resultSet = Utility.sql_query(QUERY);
 
         try{

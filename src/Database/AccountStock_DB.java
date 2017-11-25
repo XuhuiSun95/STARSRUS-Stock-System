@@ -50,7 +50,7 @@ public class AccountStock_DB{
     }
 
     public static double get_avg(String taxID, String actorID){
-        String QUERY =  "SELECT S.shares " +
+        String QUERY =  "SELECT S.avg " +
                         "FROM StockAccounts S " +
                         "WHERE S.TAXID = " + "'" + taxID + "'" + " " +
                         "AND S.actorID = " + "'" + actorID + "'";

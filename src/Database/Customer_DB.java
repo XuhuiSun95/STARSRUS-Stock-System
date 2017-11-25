@@ -80,7 +80,7 @@ public class Customer_DB{
                 Statement saved = Utility.statement;
                 Utility.statement = Utility.connection.createStatement();
 
-                int total = StockTransaction_DB.get_total_shares();
+                int total = StockTransaction_DB.get_total_shares(taxID);
 
                 Utility.statement.close();
                 Utility.statement = saved;
@@ -135,6 +135,7 @@ public class Customer_DB{
             while(resultSet.next()){
                 String username = resultSet.getString("username");
                 String taxID = resultSet.getString("TAXID");
+                String marketAccountID = AccountMarket_DB.get_market_account_id(taxID);
 
                 Statement saved = Utility.statement;
                 Utility.statement = Utility.connection.createStatement();
@@ -148,7 +149,6 @@ public class Customer_DB{
                 if(profit >= 10000){
                 res += "Username: " + username + " ,TAXID: " + taxID
                         + " ,Market Account ID: " + marketAccountID
-                        + " ,balance: " + balance +
                         + " ,Profit: " + profit + "\n";
                 }
             }

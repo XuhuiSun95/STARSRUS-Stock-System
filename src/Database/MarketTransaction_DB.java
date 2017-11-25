@@ -16,7 +16,7 @@ public class MarketTransaction_DB {
     }
 
     public static void delete_transaction(){
-        String UPDATE = "DELETE * " +
+        String UPDATE = "DELETE " +
                         "FROM MarketTransactions ";
         Utility.sql_update(UPDATE);
     }

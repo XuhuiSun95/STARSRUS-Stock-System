@@ -29,12 +29,12 @@ public class Date_DB{
     }
 
     public static void store_date(String date){
-        String UPDATE = "DELETE * " +
+        String UPDATE = "DELETE " +
                         "FROM Date ";
         Utility.sql_update(UPDATE);
 
-        String UPDATE = "INSERT INTO Date " +
-                        "VALUES(" + "'" + date + "'" + ")";
+        UPDATE = "INSERT INTO Date " +
+                 "VALUES(" + "'" + date + "'" + ")";
         Utility.sql_update(UPDATE);
     }
 

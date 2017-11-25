@@ -10,9 +10,6 @@ public class main {
     public static void main(String[] args) {
         try {
 
-            // load Date
-            Utility.load_date();
-
             //  Register JDBC driver
             Class.forName(Utility.JDBC_DRIVER).newInstance();
 
@@ -20,6 +17,9 @@ public class main {
             System.out.println("Connecting to database...");
             Utility.connection = DriverManager.getConnection(Utility.HOST,Utility.USER,Utility.PWD);
             Utility.statement = Utility.connection.createStatement();
+
+            // load Date
+            Utility.load_date();
 
             //  Creat a session
             Session session = new Session();
@@ -39,7 +39,7 @@ public class main {
                             break;
                 case "2":   session = new Manager();
                             break;
-                case "3":   session = new Customer();
+                case "3":   session = new Admin();
                             break;
                 default:    System.out.println("invalid input");
                             System.exit(1);
@@ -50,6 +50,8 @@ public class main {
             while(!Utility.logout){
                 session.single_round_process();
             }
+            
+            Utility.store_date();
 
             //  Clean-up environment
             Utility.connection.close();
@@ -78,7 +80,6 @@ public class main {
                 se.printStackTrace();
             }
         }
-        Utility.store_date();
         System.out.println("Goodbye!");
     }
 }

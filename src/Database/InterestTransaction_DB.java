@@ -42,11 +42,11 @@ public class InterestTransaction_DB {
             e.printStackTrace();
         }
 
-        return sum;
+        return res;
     }
 
     public static void delete_transaction(){
-        String UPDATE = "DELETE * " +
+        String UPDATE = "DELETE " +
                         "FROM InterestTransactions ";
         Utility.sql_update(UPDATE);
     }

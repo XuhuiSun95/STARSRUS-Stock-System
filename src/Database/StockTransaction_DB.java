@@ -19,7 +19,7 @@ public class StockTransaction_DB{
     }
 
     public static void delete_transaction(){
-        String UPDATE = "DELETE * " +
+        String UPDATE = "DELETE " +
                         "FROM StockTransactions ";
         Utility.sql_update(UPDATE);
     }

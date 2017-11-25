@@ -1,3 +1,4 @@
+DROP TABLE Date;
 DROP TABLE Admin;
 DROP TABLE Managers;
 DROP TABLE Customers;

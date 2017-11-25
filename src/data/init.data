@@ -1,3 +1,5 @@
+CREATE TABLE Date (d varchar(8));
+INSERT INTO Date (d) VALUES ('20171124');
 CREATE TABLE Admin (username varchar(255), password varchar(255));
 INSERT INTO Admin (username,password) VALUES('admin','admin');
 CREATE TABLE Managers (Name varchar(255),username varchar(255),password varchar(255),Address varchar(255),STATE varchar(2),Phone varchar(12),email varchar(255),TAXID varchar(4),SSN varchar(11));

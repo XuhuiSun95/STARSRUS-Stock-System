@@ -56,7 +56,7 @@ public class ActorStockInfo_DB{
     }
 
     public static void update_price(String actorID, double price){
-        String UPDATE = "UPDATE MarketAccounts "
+        String UPDATE = "UPDATE ActorsStockInfo "
                         + "SET CURRENTPRICE = " + (new Double(price)).toString() + " "
                         + "WHERE ACTORID = " + "'" + actorID + "'";
         Utility.sql_update(UPDATE);
