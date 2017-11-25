@@ -74,17 +74,18 @@ public class Manager extends Session{
 
         try{
             while(resultSet.next()){
+                Statement saved = Utility.statement;
+                Utility.statement = Utility.connection.createStatement();
+
                 String customerTAXID = resultSet.getString("taxID");
-                double balance = resultSet.getDouble("balance");
-                double interest = 0;
-
-
-
-
-
-
-
+                double avg = MarketTransaction_DB.get_average_balance(customerTAXID);
+                double interest = avg*Utility.interestRate;
+                double balance = AccountMarket_DB.get_account_balance(AccountMarket_DB.get_market_account_id(customerTAXID));
                 InterestTransaction_DB.record_transaction(Utility.date, customerTAXID, taxID, interest, balance+interest);
+                AccountMarket_DB.add_balance(AccountMarket_DB.get_market_account_id(customerTAXID), interest);
+
+                Utility.statement.close();
+                Utility.statement = saved;
             }
 
         } catch(Exception e){

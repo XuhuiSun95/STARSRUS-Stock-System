@@ -3,6 +3,7 @@ package Utility;
 import java.sql.*;;
 import java.sql.ResultSet;
 import Database.Date_DB;
+import Session.Manager;
 
 public class Utility{
     public static final int OPENTIME = 9;    // time for opening the market
@@ -83,6 +84,42 @@ public class Utility{
     // }
 
     public static void set_date(String d){
+        int pass = Integer.parseInt(d.substring(4,6))-Integer.parseInt(date.substring(4,6));
+        if(pass>1){
+            System.out.println("cannot fast forward more than 1 month");
+            return;
+        }else if(pass==1){
+            int year = Integer.parseInt(date.substring(0,4));
+            int month = Integer.parseInt(date.substring(4,6));
+
+            int daysInMonth;
+            switch (month) {
+                case 1: // fall through
+                case 3: // fall through
+                case 5: // fall through
+                case 7: // fall through
+                case 8: // fall through
+                case 10: // fall through
+                case 12:
+                    daysInMonth = 31;
+                    break;
+                case 2:
+                    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0)) {
+                        daysInMonth = 29;
+                    } else {
+                        daysInMonth = 28;
+                    }
+                    break;
+                default:
+                    // returns 30 even for nonexistant months
+                    daysInMonth = 30;
+            }
+            date = date.substring(0,6) + String.valueOf(daysInMonth);
+            store_date();
+            Manager M = new Manager();
+            M.add_interest();
+            M.delete_transaction();
+        }
         date = d;
         store_date();
     }

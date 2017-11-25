@@ -2,6 +2,7 @@ package Database;
 
 import Utility.Utility;
 import java.sql.*;
+import Database.*;
 
 
 public class MarketTransaction_DB {
@@ -52,31 +53,41 @@ public class MarketTransaction_DB {
         return res;
     }
 
-    public static String get_average_balance(String taxID){
+    public static double get_average_balance(String taxID){
+        double new_balance = AccountMarket_DB.get_account_balance(AccountMarket_DB.get_market_account_id(taxID));
+        
         String QUERY =  "SELECT * " +
                         "FROM MarketTransactions " +
                         "WHERE CustomerTAXID = " + "'" + taxID + "'";
 
         ResultSet resultSet = Utility.sql_query(QUERY);
 
-        String res = "";
+        double total_balance = 0;
 
         try{
-            double balance = AccountMarket_DB.get_balance(taxID);
+            int old_day = 1;
+            int total_day = Integer.parseInt(Utility.date.substring(6,8));
             while(resultSet.next()){
                 String date = resultSet.getString("date");
                 double money = resultSet.getDouble("amount");
                 double balance = resultSet.getDouble("balance");
 
-                int month = Integer.parseInt(date.substring(4,6));
-                int day = Integer.parseInt(date.substring(6,8));
-                
 
-            } 
+                int day = Integer.parseInt(date.substring(6,8));
+                total_balance += (day-old_day)*(balance-money);
+                old_day = day;
+            }
+            if(old_day == 1)
+                total_balance +=  total_day*new_balance;
+            else
+                total_balance += (total_day-old_day+1)*new_balance;
+
+            total_balance /= total_day;
 
         } catch(Exception e){
             e.printStackTrace();
         }
         
-        return res;
+        return total_balance;
+    }
 }
