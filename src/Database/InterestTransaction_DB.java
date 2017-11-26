@@ -23,11 +23,10 @@ public class InterestTransaction_DB {
 
         ResultSet resultSet = Utility.sql_query(QUERY);
 
-        double res = -1.0;
+        double res = 0.0;
         try{
             if(!resultSet.next()){
-                System.out.println("Calculate monthly interest before you calculate the tax!");
-                return -1.0;
+                return 0.0;
             }
 
             res = resultSet.getDouble("interest");

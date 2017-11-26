@@ -67,6 +67,22 @@ public class Manager extends Session{
 
     // operation deltails
     public void add_interest(){
+
+        String date = Date_DB.load_date();
+
+        int year = Integer.parseInt(date.substring(0,4));
+        int month = Integer.parseInt(date.substring(4,6));
+        int day = Integer.parseInt(date.substring(6,8));
+
+        LocalDate d = LocalDate.of(year, month, day);
+
+        if(day != d.lengthOfMonth())
+        {
+            System.out.println("Not last day of this month.\n");
+            return;
+        }
+
+
         String QUERY =  "SElECT * " +
                         "FROM Customers ";
 
@@ -140,6 +156,21 @@ public class Manager extends Session{
     }
 
     public void delete_transaction(){
+
+        String date = Date_DB.load_date();
+
+        int year = Integer.parseInt(date.substring(0,4));
+        int month = Integer.parseInt(date.substring(4,6));
+        int day = Integer.parseInt(date.substring(6,8));
+
+        LocalDate d = LocalDate.of(year, month, day);
+
+        if(day != d.lengthOfMonth())
+        {
+            System.out.println("Not last day of this month.\n");
+            return;
+        }
+
         MarketTransaction_DB.delete_transaction();
         StockTransaction_DB.delete_transaction();
         InterestTransaction_DB.delete_transaction();
