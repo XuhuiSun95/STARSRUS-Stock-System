@@ -22,6 +22,7 @@ public class Admin extends Session{
 
     @Override
     public void process_operations(String request){
+        Utility.load_date();
         switch (request) {
             case "1":   this.open_market();
                         break;
