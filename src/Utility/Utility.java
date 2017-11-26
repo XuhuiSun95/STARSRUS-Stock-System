@@ -105,7 +105,7 @@ public class Utility{
             String temp = (new Integer(year)).toString() + String.format("%02d", month) + String.format("%02d", day);
 
             if(day == old.lengthOfMonth()){
-                date = d;
+                date = temp;
                 store_date();
                 Manager M = new Manager();
                 M.add_interest();
