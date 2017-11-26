@@ -1,6 +1,6 @@
 package Session;
 
-import Utility.Utility;
+import Utility.*;
 import java.sql.*;
 import Database.*;
 import java.io.Console;
@@ -14,15 +14,17 @@ public class Customer extends Session{
     @Override
     public void display_operations(){
         String options = "Please enter the number. Options:\n";
-        options += "1: Deposit.\n";
-        options += "2: Withdrawl.\n";
-        options += "3: Buy.\n";
-        options += "4: Sell.\n";
-        options += "5: Show Balance.\n";
-        options += "6: Show Transaction history.\n";
-        options += "7: List Stock Info.\n";
-        options += "8: List Moive Info. \n";
-        options += "9: Exit\n";
+        options += "1:  Deposit.\n";
+        options += "2:  Withdrawl.\n";
+        options += "3:  Buy.\n";
+        options += "4:  Sell.\n";
+        options += "5:  Show Balance.\n";
+        options += "6:  Show Transaction history.\n";
+        options += "7:  List Stock Info.\n";
+        options += "8:  List Moive Info. \n";
+        options += "9:  List Top Movie.\n";
+        options += "10: List Movie Revie.\n";
+        options += "11: Exit.\n";
 
         System.out.println(options);
     }
@@ -46,7 +48,11 @@ public class Customer extends Session{
                         break;
             case "8":   this.list_movie_info();
                         break;
-            case "9":   Utility.logout = true;
+            case "9":   this.list_top_movie();
+                        break;
+            case "10":  this.list_review();
+                        break;
+            case "11":  Utility.logout = true;
                         break;
             default:    System.out.println("Wrong input, please try again.\n");
         }
@@ -259,6 +265,47 @@ public class Customer extends Session{
     }
 
     public void list_movie_info(){
+        Console c = System.console();
+        if (c == null) {
+            System.err.println("No console.\n");
+            System.exit(1);
+        }
 
+        String title = c.readLine("Please enter movie title:");
+        String movieInfo = MovieXMLParser.display_info(title);
+        if(movieInfo.equals("\n"))
+            System.out.println("No such movie.\n");
+        else
+            System.out.println(movieInfo);
+    }
+
+    public void list_top_movie(){
+        Console c = System.console();
+        if (c == null) {
+            System.err.println("No console.\n");
+            System.exit(1);
+        }
+
+        String time = c.readLine("Please enter time interval in following format(YYYY-YYYY):");
+        String topMovie = MovieXMLParser.top_movie(time);
+        if(topMovie.equals("\n"))
+            System.out.println("No such movie.\n");
+        else
+            System.out.println(topMovie);
+    }
+
+    public void list_review(){
+        Console c = System.console();
+        if (c == null) {
+            System.err.println("No console.\n");
+            System.exit(1);
+        }
+
+        String title = c.readLine("Please enter movie title:");
+        String review = MovieXMLParser.display_review(title);
+        if(review.equals("\n"))
+            System.out.println("No such movie.\n");
+        else
+            System.out.println(review);
     }
 }
