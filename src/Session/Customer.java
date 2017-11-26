@@ -104,6 +104,8 @@ public class Customer extends Session{
 
         AccountMarket_DB.add_balance(marketAccountID, Double.parseDouble(amount));
 
+        Utility.load_date();
+
         double balance = AccountMarket_DB.get_account_balance(marketAccountID);
         MarketTransaction_DB.record_transaction(Utility.date, taxID, Double.parseDouble(amount), balance);
     }
@@ -130,6 +132,8 @@ public class Customer extends Session{
         }
 
         AccountMarket_DB.add_balance(marketAccountID, -amount);
+
+        Utility.load_date();
 
         balance = AccountMarket_DB.get_account_balance(marketAccountID);
         MarketTransaction_DB.record_transaction(Utility.date, taxID, -amount, balance);
@@ -175,6 +179,8 @@ public class Customer extends Session{
             System.out.println("Request denied! Not enough balance\n");
             return;
         }
+
+        Utility.load_date();
 
         AccountStock_DB.add_shares(taxID, amount, actorID, price);
         AccountMarket_DB.add_balance(marketAccountID, -spent);
@@ -226,6 +232,9 @@ public class Customer extends Session{
             System.out.println("Not enough shares\n");
             return;
         }
+
+
+        Utility.load_date();
 
         double avg = AccountStock_DB.get_avg(taxID, actorID);
 
