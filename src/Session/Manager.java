@@ -70,6 +70,27 @@ public class Manager extends Session{
     // operation deltails
     public void add_interest(){
 
+        if(InterestTransaction_DB.empty()){
+            Console c = System.console();
+            if (c == null) {
+                System.err.println("No console.\n");
+                System.exit(1);
+            }
+
+            String s = c.readLine("Interest for this month already added. Do you want to coninue? yes or no");
+
+            s = s.toLowerCase();
+            s.replaceAll("\\s+","")
+
+            if(s == "no")
+                return;
+
+            if(s != "yes"){
+                System.out.println("Invalid input, request denied");
+                return;
+            }
+        }
+
         String date = Date_DB.load_date();
 
         int year = Integer.parseInt(date.substring(0,4));

@@ -108,10 +108,12 @@ public class Utility{
                 date = temp;
                 store_date();
                 Manager M = new Manager();
-                M.add_interest();
+                if(InterestTransaction_DB.empty()){
+                    M.add_interest();
+                    System.out.println("Automaticlly add interest for this month. Date:" + temp);
+                }
                 M.delete_transaction();
-                System.out.println("Interests added for this month. Date:" + temp);
-                System.out.println("Transactions of this month deleted. Date:" + temp);
+                System.out.println("Automaticlly delete transactions of this month. Date:" + temp);
             }
 
 

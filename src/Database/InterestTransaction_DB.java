@@ -5,6 +5,24 @@ import java.sql.*;
 
 
 public class InterestTransaction_DB {
+    public static Boolean empty(){
+        String QUERY =  "SELECT * " +
+                        "FROM InterestTransactions ";
+
+        ResultSet resultSet = Utility.sql_query(QUERY);
+
+        try{
+            if(!resultSet.next()){
+                return true;
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     public static void record_transaction(String date, String customerTAXID, String managerTAXID, double interest, double balance){
         String UPDATE = "INSERT INTO InterestTransactions " +
                         "VALUES(" + "'" + date + "'" + ","
