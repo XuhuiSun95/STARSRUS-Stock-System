@@ -3,31 +3,31 @@ package Database;
 import Utility.Utility;
 import java.sql.*;
 
-public static class State(){
+public class State_DB{
     public static void close_market(){
-        String UPDATE = "DELETE * " +
+        String UPDATE = "DELETE " +
                         "FROM State ";
         Utility.sql_update(UPDATE);
 
-        String UPDATE = "INSERT INTO State " +
+        UPDATE = "INSERT INTO State " +
                         "VALUES(" + "0" + ")";
         Utility.sql_update(UPDATE);
     }
 
 
     public static void open_market(){
-        String UPDATE = "DELETE * " +
+        String UPDATE = "DELETE " +
                         "FROM State ";
         Utility.sql_update(UPDATE);
 
-        String UPDATE = "INSERT INTO State " +
+        UPDATE = "INSERT INTO State " +
                         "VALUES(" + "1" + ")";
         Utility.sql_update(UPDATE);
     }
 
     public static Boolean is_open(){
         String QUERY =  "SELECT * " +
-                        "FROM Date ";
+                        "FROM State";
         ResultSet resultSet = Utility.sql_query(QUERY);
 
         try{
@@ -36,7 +36,7 @@ public static class State(){
                 System.exit(1);
             }
 
-            if(resultSet.getBoolean("s")){
+            if(resultSet.getInt("s")==1){
                 return true;
             } else {
                 return false;

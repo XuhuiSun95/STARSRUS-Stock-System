@@ -102,7 +102,7 @@ public class Utility{
             int month = old.getMonthValue();
             int day = old.getDayOfMonth();
 
-            String temp = (new Integer(year)).toString() + (new Integer(month)).toString() + (new Integer(day)).toString();
+            String temp = (new Integer(year)).toString() + String.format("%02d", month) + String.format("%02d", day);
 
             if(day == old.lengthOfMonth()){
                 Manager M = new Manager();
@@ -196,11 +196,11 @@ public class Utility{
 
 
     public static Boolean check_active(String taxID){
-        if(Customer_DB.is_active()){
+        if(Customer_DB.is_active(taxID)){
             return true;
         }
 
-        String accountID = Customer_DB.get_market_account_id();
+        String accountID = AccountMarket_DB.get_market_account_id(taxID);
         double balance = AccountMarket_DB.get_account_balance(accountID);
 
         if(balance >= 1000.0){

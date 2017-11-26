@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 public class Customer_DB{
 
     public static void active(String taxID){
-        String UPADTE = "UPDATE Customer " +
+        String UPDATE = "UPDATE Customers " +
                         "SET active = true " +
                         "WHERE taxID = " + "'" + taxID + "'";
         Utility.sql_update(UPDATE);

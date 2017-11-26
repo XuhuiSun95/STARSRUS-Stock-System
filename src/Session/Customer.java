@@ -82,7 +82,7 @@ public class Customer extends Session{
 
     // operation deltails
     public void deposit(){
-        if(Utility.marketState == false){
+        if(Utility.market_is_open() == false){
             System.out.println("Market Closed.\n");
             return;
         }
@@ -102,7 +102,7 @@ public class Customer extends Session{
     }
 
     public void withdrawl(){
-        if(Utility.marketState == false){
+        if(Utility.market_is_open() == false){
             System.out.println("Market Closed.\n");
             return;
         }
@@ -130,7 +130,7 @@ public class Customer extends Session{
 
     public void buy(){
 
-        if(Utility.check_active() == false){
+        if(Utility.check_active(taxID) == false){
             System.out.println("Not enough balance. Account State: Inactive.\n");
             return;
         }
@@ -178,7 +178,7 @@ public class Customer extends Session{
 
     public void sell(){
 
-        if(Utility.check_active() == false){
+        if(Utility.check_active(taxID) == false){
             System.out.println("Not enough balance. Account State: Inactive.\n");
             return;
         }
