@@ -21,7 +21,7 @@ public class Utility{
     public static Connection connection;
     public static Statement statement;
 
-    // public static String date;   // system date
+    public static String date;   // system date
     public static Boolean marketState = false; // open or closed
 
     public static double interestRate = 0.03;
