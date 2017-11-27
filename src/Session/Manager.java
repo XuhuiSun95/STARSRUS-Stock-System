@@ -80,7 +80,7 @@ public class Manager extends Session{
             String s = c.readLine("Interest for this month already added. Do you want to coninue? yes or no");
 
             s = s.toLowerCase();
-            s.replaceAll("\\s+","")
+            s.replaceAll("\\s+","");
 
             if(s == "no")
                 return;
