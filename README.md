@@ -5,4 +5,3 @@
 ```shell
 ant compile jar run
 ```
-test
