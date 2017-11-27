@@ -70,22 +70,21 @@ public class Manager extends Session{
     // operation deltails
     public void add_interest(){
 
-        if(InterestTransaction_DB.empty()){
+        if(!InterestTransaction_DB.empty()){
             Console c = System.console();
             if (c == null) {
                 System.err.println("No console.\n");
                 System.exit(1);
             }
 
-            String s = c.readLine("Interest for this month already added. Do you want to coninue? yes or no");
+            String s = c.readLine("Interest for this month already added. Do you want to coninue? yes or no\n");
 
-            s = s.toLowerCase();
-            s.replaceAll("\\s+","");
-
-            if(s == "no")
+            s = s.toLowerCase().replaceAll("\\s+","");
+            
+            if(s.equals("no"))
                 return;
 
-            if(s != "yes"){
+            if(!s.equals("yes")){
                 System.out.println("Invalid input, request denied");
                 return;
             }
