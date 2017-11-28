@@ -225,11 +225,11 @@ public class Customer_DB{
             while(resultSet.next()){
                 String username = resultSet.getString("username");
                 String taxID = resultSet.getString("TAXID");
-                String marketAccountID = AccountMarket_DB.get_market_account_id(taxID);
 
                 Statement saved = Utility.statement;
                 Utility.statement = Utility.connection.createStatement();
 
+                String marketAccountID = AccountMarket_DB.get_market_account_id(taxID);
                 double profit = StockTransaction_DB.get_total_profit(taxID);
                 profit += InterestTransaction_DB.get_interest(taxID);
 
