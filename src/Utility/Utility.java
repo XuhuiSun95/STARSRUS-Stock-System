@@ -14,9 +14,9 @@ public class Utility{
 
     // parameters for connecting to the MySQL server
     public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    public static final String HOST = "jdbc:mysql://localhost/xuhui_sunDB";
-    public static final String USER = "root";
-    public static final String PWD = "950802cherry";
+    public static final String HOST = "jdbc:mysql://cs174a.engr.ucsb.edu:3306/xuhui_DB";
+    public static final String USER = "xuhui_sun";
+    public static final String PWD = "083";
 
     public static Connection connection;
     public static Statement statement;
