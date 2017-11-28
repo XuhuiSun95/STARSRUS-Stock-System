@@ -102,6 +102,11 @@ public class Customer extends Session{
 
         String amount = c.readLine("Please enter the amount:");
 
+        if(Utility.market_is_open() == false){
+            System.out.println("Market Closed.\n");
+            return;
+        }
+
         AccountMarket_DB.add_balance(marketAccountID, Double.parseDouble(amount));
 
         Utility.load_date();
@@ -128,6 +133,11 @@ public class Customer extends Session{
 
         if(balance < amount){
             System.out.println("Request denied! Not enough balance!\n");
+            return;
+        }
+
+        if(Utility.market_is_open() == false){
+            System.out.println("Market Closed.\n");
             return;
         }
 
@@ -177,6 +187,11 @@ public class Customer extends Session{
         double balance = AccountMarket_DB.get_account_balance(marketAccountID);
         if(spent > balance){
             System.out.println("Request denied! Not enough balance\n");
+            return;
+        }
+
+        if(Utility.market_is_open() == false){
+            System.out.println("Market Closed.\n");
             return;
         }
 
@@ -230,6 +245,11 @@ public class Customer extends Session{
 
         if(amount > shares){
             System.out.println("Not enough shares\n");
+            return;
+        }
+
+        if(Utility.market_is_open() == false){
+            System.out.println("Market Closed.\n");
             return;
         }
 
