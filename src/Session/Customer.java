@@ -302,8 +302,14 @@ public class Customer extends Session{
         }
 
         String title = c.readLine("Please enter movie title:");
-        String movieInfo = MovieXMLParser.display_info(title);
-        if(movieInfo.equals("\n"))
+        // String movieInfo = MovieXMLParser.display_info(title);
+        // if(movieInfo.equals("\n"))
+        //     System.out.println("No such movie.\n");
+        // else
+        //     System.out.println(movieInfo);
+
+        String movieInfo = Movies_DB.get_movie(title);
+        if(movieInfo.equals(""))
             System.out.println("No such movie.\n");
         else
             System.out.println(movieInfo);
@@ -317,8 +323,13 @@ public class Customer extends Session{
         }
 
         String time = c.readLine("Please enter time interval in following format(YYYY-YYYY):");
-        String topMovie = MovieXMLParser.top_movie(time);
-        if(topMovie.equals("\n"))
+        // String topMovie = MovieXMLParser.top_movie(time);
+        // if(topMovie.equals("\n"))
+        //     System.out.println("No such movie.\n");
+        // else
+        //     System.out.println(topMovie);
+        String topMovie = Movies_DB.top_movies(time);
+        if(topMovie.equals(""))
             System.out.println("No such movie.\n");
         else
             System.out.println(topMovie);
@@ -332,8 +343,13 @@ public class Customer extends Session{
         }
 
         String title = c.readLine("Please enter movie title:");
-        String review = MovieXMLParser.display_review(title);
-        if(review.equals("\n"))
+        // String review = MovieXMLParser.display_review(title);
+        // if(review.equals("\n"))
+        //     System.out.println("No such movie.\n");
+        // else
+        //     System.out.println(review);
+        String review = Movies_DB.display_review(title);
+        if(review.equals(""))
             System.out.println("No such movie.\n");
         else
             System.out.println(review);
