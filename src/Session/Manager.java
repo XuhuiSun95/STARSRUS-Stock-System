@@ -80,7 +80,7 @@ public class Manager extends Session{
             String s = c.readLine("Interest for this month already added. Do you want to coninue? yes or no\n");
 
             s = s.toLowerCase().replaceAll("\\s+","");
-            
+
             if(s.equals("no"))
                 return;
 
@@ -196,5 +196,6 @@ public class Manager extends Session{
         MarketTransaction_DB.delete_transaction();
         StockTransaction_DB.delete_transaction();
         InterestTransaction_DB.delete_transaction();
+        InterestTransaction_DB.record_transaction("", "", "", 0.0, 0.0);
     }
 }
