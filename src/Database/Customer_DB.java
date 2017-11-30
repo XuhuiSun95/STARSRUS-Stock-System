@@ -225,6 +225,7 @@ public class Customer_DB{
             while(resultSet.next()){
                 String username = resultSet.getString("username");
                 String taxID = resultSet.getString("TAXID");
+                String state = resultSet.getString("state");
 
                 Statement saved = Utility.statement;
                 Utility.statement = Utility.connection.createStatement();
@@ -238,6 +239,7 @@ public class Customer_DB{
 
                 if(profit >= 10000){
                 res += "Username: " + username + " ,TAXID: " + taxID
+                        + " ,State: " + state
                         + " ,Market Account ID: " + marketAccountID
                         + " ,Profit: " + profit + "\n";
                 }
