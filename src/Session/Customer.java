@@ -323,6 +323,10 @@ public class Customer extends Session{
         }
 
         String time = c.readLine("Please enter time interval in following format(YYYY-YYYY):");
+        if(time.length()!=9 || time.charAt(4)!='-') {
+            System.out.println("invalid input.\n");
+            return;
+        }
         // String topMovie = MovieXMLParser.top_movie(time);
         // if(topMovie.equals("\n"))
         //     System.out.println("No such movie.\n");
