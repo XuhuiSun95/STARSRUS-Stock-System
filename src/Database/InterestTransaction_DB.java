@@ -49,10 +49,10 @@ public class InterestTransaction_DB {
 
             res = resultSet.getDouble("interest");
 
-            if(resultSet.next()){
-                System.out.println("Invalid data in database: multiple interest info");
-                System.exit(2);
-            }
+            // if(resultSet.next()){
+            //     System.out.println("Invalid data in database: multiple interest info");
+            //     System.exit(2);
+            // }
 
         }
         catch(Exception e){
