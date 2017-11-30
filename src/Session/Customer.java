@@ -228,6 +228,10 @@ public class Customer extends Session{
             return;
         }
 
+        String info = AccountStock_DB.get_shares_info(taxID, actorID);
+        system.out.println("Current shares summary:");
+        system.out.println(info);
+
         String temp = c.readLine("The bought price for the shares you want to sell: ");
         double price = Double.parseDouble(temp);
         int shares = AccountStock_DB.get_shares(taxID, actorID, price);
