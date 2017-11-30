@@ -18,7 +18,7 @@ INSERT INTO Customers (Name,username,password,Address,STATE,Phone,email,TAXID,SS
 INSERT INTO Customers (Name,username,password,Address,STATE,Phone,email,TAXID,SSN,active) VALUES('Magic Jordon','magic','jo','3852 Court Rd','NJ','(805)4535539','jordon@jordon.org','3455','646-76-8843',1);
 INSERT INTO Customers (Name,username,password,Address,STATE,Phone,email,TAXID,SSN,active) VALUES('Olive Stoner','olive','st','6689 El Colegio #151','CA','(805)2574499','olive@yahoo.com','1123','645-34-7900',1);
 INSERT INTO Customers (Name,username,password,Address,STATE,Phone,email,TAXID,SSN,active) VALUES('Frank Olson','frank','ol','6910 Whittier Dr','CA','(805)3456789','frank@gmail.com','3306','345-23-2134',1);
-CREATE TABLE StockAccounts (TAXID varchar(4),SHARES INT,ACTORID varchar(3),AVG DOUBLE, PRIMARY KEY(TAXID,ACTORID), FOREIGN KEY(TAXID) REFERENCES Customers(TAXID));
+CREATE TABLE StockAccounts (TAXID varchar(4),SHARES INT,ACTORID varchar(3),PRICE DOUBLE, PRIMARY KEY(TAXID,ACTORID), FOREIGN KEY(TAXID) REFERENCES Customers(TAXID));
 INSERT INTO StockAccounts (TAXID,SHARES,ACTORID,AVG) VALUES('1022',100,'SKB',40.00);
 INSERT INTO StockAccounts (TAXID,SHARES,ACTORID,AVG) VALUES('3045',500,'SMD',71.00);
 INSERT INTO StockAccounts (TAXID,SHARES,ACTORID,AVG) VALUES('3045',100,'STC',32.50);

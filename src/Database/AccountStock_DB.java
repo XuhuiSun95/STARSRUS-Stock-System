@@ -5,33 +5,37 @@ import java.sql.*;
 
 public class AccountStock_DB{
 
-    // public static String get_stock_account_id(String taxID){
-    //     String QUERY =  "SELECT S.accountID" +
-    //                     "FROM StockAccounts M" +
-    //                     "WHERE S.TAXID = " + taxID;
-    //
-    //     ResultSet resultSet = Utility.sql_query(QUERY);
-    //
-    //     String res = "";
-    //
-    //     try{
-    //         if(!resultSet.next()){
-    //             System.err.println("No such stock account id.");
-    //             System.exit(1);
-    //         }
-    //         res = resultSet.getString("accountID");
-    //     } catch (Exception e){
-    //         e.printStackTrace();
-    //     }
-    //
-    //     return res;
-    // }
-
-    public static int get_shares(String taxID, String actorID){
-        String QUERY =  "SELECT S.shares " +
+    public static String get_shares_info(String taxID, String actorID){
+        String QUERY =  "SELECT S.shares S.price" +
                         "FROM StockAccounts S " +
                         "WHERE S.TAXID = " + "'" + taxID + "'" + " " +
                         "AND S.actorID = " + "'" + actorID + "'";
+
+        ResultSet resultSet = Utility.sql_query(QUERY);
+
+        String res = "";
+
+        try{
+            while(resultSet.next()){
+                int shares = resultSet.getInt("shares");
+                double price = resultSet.getDouble("price");
+
+                res += "\t shares: " + (new Integer(shares)).toString() + ", " +
+                        "bought price: " + (new Double(price)).toString() + "\n";
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return res;
+    }
+
+    public static int get_shares(String taxID, String actorID, double price){
+        String QUERY =  "SELECT S.shares " +
+                        "FROM StockAccounts S " +
+                        "WHERE S.TAXID = " + "'" + taxID + "'" + " " +
+                        "AND S.actorID = " + "'" + actorID + "'" +
+                        " AND price = " + (new Double(price)).toString();
 
         ResultSet resultSet = Utility.sql_query(QUERY);
 
@@ -49,57 +53,27 @@ public class AccountStock_DB{
         return res;
     }
 
-    public static double get_avg(String taxID, String actorID){
-        String QUERY =  "SELECT S.avg " +
-                        "FROM StockAccounts S " +
-                        "WHERE S.TAXID = " + "'" + taxID + "'" + " " +
-                        "AND S.actorID = " + "'" + actorID + "'";
-
-        ResultSet resultSet = Utility.sql_query(QUERY);
-
-        double res = -1.0;
-
-        try{
-            if(!resultSet.next()){
-                return -1.0;
-            }
-            res = resultSet.getDouble("avg");
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return res;
-    }
 
     public static void add_shares(String taxID, int amount, String actorID, double price){
         String QUERY =  "SELECT * " +
                         "FROM StockAccounts " +
-                        "WHERE actorID = " + "'" + actorID + "'" + " AND taxID = '" + taxID + "'";
+                        "WHERE actorID = " + "'" + actorID + "'" + " AND taxID = '" + taxID + "'" + " AND price = " + (new Double(price)).toString();
         ResultSet resultSet = Utility.sql_query(QUERY);
         String UPDATE = "";
         try {
             if(resultSet.next()){
                 int shares = resultSet.getInt("shares");
-                double avg = resultSet.getDouble("avg");
                 if(shares == -amount) {
-                    UPDATE = "DELETE from StockAccounts WHERE actorID = " + "'" + actorID + "'" + " AND taxID = '" + taxID + "'";
+                    UPDATE = "DELETE from StockAccounts WHERE actorID = " + "'" + actorID + "'" + " AND taxID = '" + taxID + "'" + " AND price = " + (new Double(price)).toString();
                     Utility.sql_update(UPDATE);
                 }
                 else {
                     int new_shares = shares + amount;
-                    if(amount>0){
-                        double new_avg = (avg*shares + price*amount)/(new_shares);
+                    UPDATE = "UPDATE StockAccounts "
+                            + "SET shares = " + String.valueOf(new_shares) + " "
+                            + "WHERE actorID = " + "'" + actorID + "'" + " AND taxID = '" + taxID + "'";
+                    Utility.sql_update(UPDATE);
 
-                        UPDATE = "UPDATE StockAccounts "
-                                + "SET avg = " + String.valueOf(new_avg) + ", shares = " + String.valueOf(new_shares) + " "
-                                + "WHERE actorID = " + "'" + actorID + "'" + " AND taxID = '" + taxID + "'";
-                        Utility.sql_update(UPDATE);
-                    } else {
-                        UPDATE = "UPDATE StockAccounts "
-                                + "SET shares = " + String.valueOf(new_shares) + " "
-                                + "WHERE actorID = " + "'" + actorID + "'" + " AND taxID = '" + taxID + "'";
-                        Utility.sql_update(UPDATE);
-                    }
                 }
             } else {
                 UPDATE =    "INSERT INTO StockAccounts " +

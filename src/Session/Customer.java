@@ -222,29 +222,31 @@ public class Customer extends Session{
             System.exit(1);
         }
 
-        String actorID = c.readLine("Stock you want to sell:");
+        String actorID = c.readLine("Stock you want to sell: ");
         if(actorID.length() != 3){
-            System.out.println("Invalid Stock symbol\n");
+            System.out.println("Invalid Stock symbol!\n");
             return;
         }
 
-        int shares = AccountStock_DB.get_shares(taxID, actorID);
+        String temp = c.readLine("The bought price for the shares you want to sell: ");
+        double price = Double.parseDouble(temp);
+        int shares = AccountStock_DB.get_shares(taxID, actorID, price);
         if(shares == -1){
-            System.out.println("No such stock!\n");
+            System.out.println("No such bought price!\n");
             return;
         }
 
-        double price = ActorStockInfo_DB.get_price(actorID);
+        double curPrice = ActorStockInfo_DB.get_price(actorID);
         if(price == -1.0){
             System.out.println("No such stock!\n");
             return;
         }
 
-        String temp = c.readLine("Amount you want to sell:");
+        temp = c.readLine("Amount you want to sell:");
         int amount = Integer.parseInt(temp);
 
         if(amount > shares){
-            System.out.println("Not enough shares\n");
+            System.out.println("Not enough shares. Request denied.\n");
             return;
         }
 
@@ -256,16 +258,16 @@ public class Customer extends Session{
 
         Utility.load_date();
 
-        double avg = AccountStock_DB.get_avg(taxID, actorID);
-
         AccountStock_DB.add_shares(taxID, -amount, actorID, price);
         AccountMarket_DB.add_balance(marketAccountID, price*amount-20);
 
-        double profit = price*amount - avg*amount - 20;
-        System.out.print("price:");
+        double profit = curPrice*amount - price*amount - 20;
+        System.out.print("selling price:");
+        System.out.println(curPrice);
+        System.out.print("bought price:");
         System.out.println(price);
-        System.out.print("avg:");
-        System.out.println(avg);
+        System.out.print("amount:");
+        System.out.println(amount);
         System.out.print("profit:");
         System.out.println(profit);
 
