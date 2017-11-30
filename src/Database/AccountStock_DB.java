@@ -6,7 +6,7 @@ import java.sql.*;
 public class AccountStock_DB{
 
     public static String get_shares_info(String taxID, String actorID){
-        String QUERY =  "SELECT S.shares S.price" +
+        String QUERY =  "SELECT S.shares S.price " +
                         "FROM StockAccounts S " +
                         "WHERE S.TAXID = " + "'" + taxID + "'" + " " +
                         "AND S.actorID = " + "'" + actorID + "'";
