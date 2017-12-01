@@ -98,11 +98,35 @@ public class Manager extends Session{
 
         LocalDate d = LocalDate.of(year, month, day);
 
-        if(day != d.lengthOfMonth())
-        {
-            System.out.println("Not last day of this month.\n");
-            return;
+        // if(day != d.lengthOfMonth())
+        // {
+        //     System.out.println("Not last day of this month.\n");
+        //     return;
+        // }
+
+
+        if(day != d.lengthOfMonth()){
+            Console c = System.console();
+            if (c == null) {
+                System.err.println("No console.\n");
+                System.exit(1);
+            }
+
+            String s = c.readLine("No last day of this month. The interest will still be calculated over this month range. Do you want to continue? yes or no\n");
+
+            s = s.toLowerCase().replaceAll("\\s+","");
+
+            if(s.equals("no"))
+                return;
+
+            if(!s.equals("yes")){
+                System.out.println("Invalid input, request denied");
+                return;
+            }
         }
+
+
+
 
 
         String QUERY =  "SElECT * " +
