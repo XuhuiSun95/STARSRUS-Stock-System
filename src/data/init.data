@@ -1,10 +1,10 @@
 CREATE TABLE Date (d varchar(8));
-INSERT INTO Date (d) VALUES ('20171124');
+INSERT INTO Date (d) VALUES ('20130301');
 CREATE TABLE State (s BOOL);
 INSERT INTO State (s) VALUES (0);
 CREATE TABLE Admin (username varchar(255), password varchar(255));
 INSERT INTO Admin (username,password) VALUES('admin','admin');
-CREATE TABLE Managers (Name varchar(255),username varchar(255),password varchar(255),Address varchar(255),STATE varchar(2),Phone varchar(12),email varchar(255),TAXID varchar(4),SSN varchar(11));
+CREATE TABLE Managers (Name varchar(255),username varchar(255),password varchar(255),Address varchar(255),STATE varchar(2),Phone varchar(12),email varchar(255),TAXID varchar(4),SSN varchar(11), PRIMARY KEY(TAXID), UNIQUE(SSN,username));
 INSERT INTO Managers (Name,username,password,Address,STATE,Phone,email,TAXID,SSN) VALUES('John Admin','admin','secret','Stock Company SB','CA','(805)6374632','admin@stock.com','1000','606-60-6060');
 CREATE TABLE Customers (Name varchar(255),username varchar(255),password varchar(255),Address varchar(255),STATE varchar(2),Phone varchar(12),email varchar(255),TAXID varchar(4),SSN varchar(11),active BOOL, PRIMARY KEY(TAXID), UNIQUE(SSN,username));
 INSERT INTO Customers (Name,username,password,Address,STATE,Phone,email,TAXID,SSN,active) VALUES('Alfred Hitchcock','alfreid','hi','6667 El Colegio #40 SB','CA','(805)2574499','alfred@hotmail.com','1022','606-76-7900',1);
