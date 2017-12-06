@@ -1,5 +1,5 @@
 # CS174a_Final_Project
-Huiyang He
+Huiyang He<br>
 Xuhui Sun
 
 ## Install and Run Program:
