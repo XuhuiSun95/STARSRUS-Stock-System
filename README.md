@@ -1,4 +1,6 @@
 # CS174a_Final_Project
+Huiyang He
+Xuhui Sun
 
 ## Install and Run Program:
 1. Apache Ant
