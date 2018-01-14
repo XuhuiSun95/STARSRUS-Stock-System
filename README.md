@@ -1,5 +1,5 @@
 # STARSRUS-Stock-System
-CS174a_Final_Project
+UCSB CS174a Final Project
 
 Huiyang He<br>
 Xuhui Sun
